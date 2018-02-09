@@ -1,5 +1,5 @@
 # Chat application
-This application creating from HTML5, CSS3, jQuery och [Firebase](https://firebase.google.com/)
+This application creating from HTML5, CSS3, [jQuery](https://jquery.com/) och [Firebase](https://firebase.google.com/)
 
 # Changelogs
 

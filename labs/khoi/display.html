@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example for Firebase</title>
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        let config = {
+            apiKey: "AIzaSyCLy8U4Wy0D0qYAVezelDt-TrFiueCfYng",
+            authDomain: "ecchat-c34bf.firebaseapp.com",
+            databaseURL: "https://ecchat-c34bf.firebaseio.com",
+            projectId: "ecchat-c34bf",
+            storageBucket: "ecchat-c34bf.appspot.com",
+            messagingSenderId: "258738066233"
+        };
+        firebase.initializeApp(config);
+        let database = firebase.database();
+    </script>
+</head>
+<body>
+
+<h1>Example for Firebase</h1>
+
+<h3>Display users in the real time</h3>
+
+    <div id="containerOutput">
+        <p id="dspOutput"></p>
+    </div>
+
+    <script>
+        function showUserList(objUserInfo, objKey) {
+            let htmlContent = "";
+
+            htmlContent += "<p>" + objKey + "<br>";
+            htmlContent += objUserInfo.uFullname + "<br>";
+            htmlContent += objUserInfo.uEmail + "<br>";
+            htmlContent += objUserInfo.uUsername + "<br>";
+            htmlContent += objUserInfo.uPassword + "<br></p>";
+
+            $("#dspOutput").append(htmlContent);
+        }
+
+        //The real-time data and update by itself when data changed from database server
+        let path = "users";
+        let nodeRef = database.ref().child(path);
+
+        nodeRef.on('value',function (snapshot) {
+            /*console.log(snapshot.val());*/ //Used for testing purpose
+            $("#dspOutput").text(""); //clear the display before get new data
+            snapshot.forEach(function (childSnapshot) {
+                showUserList(childSnapshot.val(),childSnapshot.key)
+            });
+        });
+    </script>
+
+</body>
+</html>

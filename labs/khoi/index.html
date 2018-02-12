@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example for Firebase</title>
+    <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        let config = {
+            apiKey: "AIzaSyCLy8U4Wy0D0qYAVezelDt-TrFiueCfYng",
+            authDomain: "ecchat-c34bf.firebaseapp.com",
+            databaseURL: "https://ecchat-c34bf.firebaseio.com",
+            projectId: "ecchat-c34bf",
+            storageBucket: "ecchat-c34bf.appspot.com",
+            messagingSenderId: "258738066233"
+        };
+        firebase.initializeApp(config);
+        let database = firebase.database();
+    </script>
+</head>
+<body>
+
+<h1>Example for Firebase</h1>
+
+    <div id="containerInput">
+        <form action="#">
+            <label for="txtKey">Key</label>
+            <input id="txtKey" type="text" readonly><br>
+
+            <label for="txtFullname">Fullname</label>
+            <input id="txtFullname" type="text"><br>
+
+            <label for="txtUsername">Username</label>
+            <input id="txtUsername" type="text"><br>
+
+            <label for="txtPassword">Password</label>
+            <input id="txtPassword" type="text"><br>
+
+            <label for="txtEmail">Email</label>
+            <input id="txtEmail" type="text"><br>
+
+            <button id="btnSubmit" type="button">Submit</button>
+            <button id="btnEdit" type="button">Edit</button>
+        </form>
+    </div>
+
+    <div id="containerOutput">
+        <p id="dspOutput"></p>
+    </div>
+
+    <script src="scripts/functions.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        //The real-time data and update by itself when data changed from database server
+        let path = "users";
+        let nodeRef = database.ref().child(path);
+
+        nodeRef.on('value',function (snapshot) {
+            /*console.log(snapshot.val());*/ //Used for testing purpose
+            $("#dspOutput").text(""); //clear the display before get new data
+            snapshot.forEach(function (childSnapshot) {
+                showUserList(childSnapshot.val(),childSnapshot.key)
+            });
+        });
+    </script>
+
+</body>
+</html>

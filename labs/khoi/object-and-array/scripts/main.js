@@ -4,6 +4,8 @@ let objProduct3 = new Product(3,"Lemon",30,"Made in Sweden","lemon.jpg");
 
 let arrProducts = [objProduct1,objProduct2,objProduct3];
 
-for (let i = 0; i < arrProducts.length; i++){
+let i;
+let arrProductsLength = arrProducts.length;
+for (i = 0; i < arrProductsLength; i++){
     showProductList(arrProducts[i].productId,arrProducts[i].productName,arrProducts[i].productPrice, arrProducts[i].productDescription,arrProducts[i].productImageUrl);
 }

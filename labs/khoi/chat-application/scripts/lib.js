@@ -22,7 +22,7 @@ function getCurrentTime() {
     return addZeroToDateTime(hours) + ":" + addZeroToDateTime(minutes)  + ":" + addZeroToDateTime(seconds);
 }
 
-//Other
+//---------------------------Other---------------------------
 function writeToLogs(errorCode,errorMessage) {
     let message;
     if (parseInt(errorCode) === 0)

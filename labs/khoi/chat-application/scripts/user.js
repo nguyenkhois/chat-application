@@ -46,12 +46,41 @@ $(document).ready(function(){
                     writeToLogs(errorCode,errorMessage);
             });
     });
+    $("#btnLogin").click(function () {
+        let uEmail = $("#txtEmail").val();
+        let uPassword = $("#txtPassword").val();
+
+        firebase.auth().signInWithEmailAndPassword(uEmail, uPassword)
+            .then(function () {
+                let user = firebase.auth().currentUser;
+                let userId = user.uid;
+
+                writeToLogs(0,"Successfully logged in with user ID: " + userId);
+
+                //Get user information
+                $("#frmLogin").hide();
+                getUserInfo(userId);
+            })
+            .catch(function(error) {
+                // An error happened.
+                console.log(error);
+            });
+    });
 });
 
 //Functions
 function createUser(userId, txtFullname){
     let nodeRef = database.ref("users/" + userId);
-    nodeRef.set({
-        uFullname:txtFullname,
-        isActive:true});
+    nodeRef.set({uFullname:txtFullname,
+                 isActive:true});
+}
+function getUserInfo(userId) {
+    let nodeRef = database.ref().child("users/" + userId);
+    nodeRef.once("value")
+        .then(function (snapshot) {
+            $("#dspUserInfo").text(snapshot.val().uFullname+" logged in");
+        })
+        .catch(function (error) {
+            return "Find not found!";
+        });
 }

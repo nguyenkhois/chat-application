@@ -26,24 +26,15 @@ $(document).ready(function(){
                             writeToLogs(0,"Created new user in own FB with fullname is: " + user.displayName);
                             clearForm();
                         }).catch(function(error) {
-                            // An error happened.
-                            console.log(error);
+                            writeToLogs(error.code,error.message);
                         });
                     })
                     .catch(function(error) {
-                        // Handle Errors here.
-                        let errorCode = error.code;
-                        let errorMessage = error.message;
-                        if (errorCode !== '')
-                            writeToLogs(errorCode,errorMessage);
+                        writeToLogs(error.code,error.message);
                     });
             })
             .catch(function(error) {
-                // Handle Errors here.
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                if (errorCode !== '')
-                    writeToLogs(errorCode,errorMessage);
+                writeToLogs(error.code,error.message);
             });
     });
     $("#btnLogin").click(function () {
@@ -53,17 +44,15 @@ $(document).ready(function(){
         firebase.auth().signInWithEmailAndPassword(uEmail, uPassword)
             .then(function () {
                 let user = firebase.auth().currentUser;
-                let userId = user.uid;
 
-                writeToLogs(0,"Successfully logged in with user ID: " + userId);
+                writeToLogs(0,"Successfully logged in with userID: " + user.uid);
 
                 //Get user information
                 $("#frmLogin").hide();
-                getUserInfo(userId);
+                getUserInfo(user.uid);
             })
             .catch(function(error) {
-                // An error happened.
-                console.log(error);
+                writeToLogs(error.code,error.message);
             });
     });
 });
@@ -81,6 +70,6 @@ function getUserInfo(userId) {
             $("#dspUserInfo").text(snapshot.val().uFullname+" logged in");
         })
         .catch(function (error) {
-            return "Find not found!";
+            writeToLogs(error.code,error.message);
         });
 }

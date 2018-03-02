@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <title>ChatApp - Login</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="external-resources/web-addons.css">
     <script src="external-resources/jquery-3.3.1.min.js"></script>
     <script src="external-resources/web-addons.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
 </head>
 <body>
 
+<div id="container">
+
     <!--Create user-->
-    <div id="login">
-        <h1>LOGIN</h1>
+    <div id="login" class="box box-shadow frm-login">
+        <h1>Sign in to ChatApp</h1>
         <form action="#" id="frmLogin">
-            <h3>YOUR ACCOUNT</h3>
-            <label for="txtEmail">Email</label><br>
-            <input type="text" id="txtEmail"><br>
-            <label for="txtPassword">Password</label><br>
-            <input type="text" id="txtPassword"><br>
-            <button id="btnLogin" type="button">Login</button>
+            <p>Enter your chat's account</p>
+            <input type="text" id="txtEmail" placeholder="your-email@example.com" minlength="5" maxlength="50" required><br>
+            <input type="password" id="txtPassword" placeholder="your password" minlength="6" maxlength="50"  required><br>
+            <button id="btnLogin" type="button" class="button button-login">Sign in</button>
         </form>
-        <div id="dspUserInfo"></div>
+        <a href="create-user.html">Don't have an account? Sign up here</a>
     </div>
 
+    <div id="dspUserInfo"></div>
     <div id="systemMessages"></div>
 
+</div>
     <!-- Script -->
     <script src="scripts/config.js"></script>
     <script src="scripts/functions.js"></script>

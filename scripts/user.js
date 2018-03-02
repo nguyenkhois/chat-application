@@ -1,9 +1,10 @@
 $(document).ready(function(){
-    $("#btnCreateUser").click(function () {
+    $("#btnCreateUser").click(function (event) {
         let uEmail = $("#txtEmail").val();
         let uPassword = $("#txtPassword").val();
-        let uFullname = $("#txtFullname").val();
+        let uDisplayName = $("#txtDisplayName").val();
         let uPhoneNumber = $("#txtPhoneNumber").val();
+        let uPhotoURL = $("#txtPhotoURL").val();
 
         // Create the user account
         firebase.auth().createUserWithEmailAndPassword(uEmail, uPassword)
@@ -16,28 +17,14 @@ $(document).ready(function(){
                         writeToLogs(0,"Successfully logged in with email: " + uEmail);
                         let user = firebase.auth().currentUser;
 
-                        //Update user profile
-                        user.updateProfile({
-                            displayName: uFullname,
-                            phoneNumber: uPhoneNumber
-                        }).then(function() {
-                            //Create new user in own Real-time Firebase database with information in user profile
-                            createUser(user.uid,user.displayName);
-                            writeToLogs(0,"Created new user in own FB with fullname is: " + user.displayName);
-                            clearForm();
-                        }).catch(function(error) {
-                            writeToLogs(error.code,error.message);
-                        });
+                        createUser(user.uid,uDisplayName,uPhoneNumber,uPhotoURL);
+                        $("#createUser").hide();
                     })
-                    .catch(function(error) {
-                        writeToLogs(error.code,error.message);
-                    });
+                    .catch(function(error) {writeToLogs(error.code,error.message);});
             })
-            .catch(function(error) {
-                writeToLogs(error.code,error.message);
-            });
+            .catch(function(error) {writeToLogs(error.code,error.message);});
     });
-    $("#btnLogin").click(function () {
+    $("#btnLogin").click(function (event) {
         let uEmail = $("#txtEmail").val();
         let uPassword = $("#txtPassword").val();
 
@@ -46,30 +33,29 @@ $(document).ready(function(){
                 let user = firebase.auth().currentUser;
 
                 writeToLogs(0,"Successfully logged in with userID: " + user.uid);
-
                 //Get user information
-                $("#frmLogin").hide();
+                $("#login").hide();
                 getUserInfo(user.uid);
             })
-            .catch(function(error) {
-                writeToLogs(error.code,error.message);
-            });
+            .catch(function(error) {writeToLogs(error.code,error.message);});
     });
 });
 
 //Functions
-function createUser(userId, txtFullname){
+function createUser(userId, txtDisplayName,txtPhoneNumber,txtPhotoURL){
     let nodeRef = database.ref("users/" + userId);
-    nodeRef.set({uFullname:txtFullname,
-                 isActive:true});
+    nodeRef.set({displayName:txtDisplayName,
+                 phoneNumber:txtPhoneNumber,
+                 photoURL:txtPhotoURL,
+                 isOnline:true})
+            .then(function () {writeToLogs(0,"Created new user in own database with display name is: " + txtDisplayName);})
+            .catch(function () {});
+
+    getUserInfo(userId);
 }
 function getUserInfo(userId) {
     let nodeRef = database.ref().child("users/" + userId);
     nodeRef.once("value")
-        .then(function (snapshot) {
-            $("#dspUserInfo").text(snapshot.val().uFullname+" logged in");
-        })
-        .catch(function (error) {
-            writeToLogs(error.code,error.message);
-        });
+            .then(function (snapshot) {$("#dspUserInfo").text(snapshot.val().displayName+" logged in");})
+            .catch(function (error) {writeToLogs(error.code,error.message);});
 }

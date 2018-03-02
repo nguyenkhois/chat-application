@@ -32,6 +32,4 @@ function writeToLogs(errorCode,errorMessage) {
 
     $("#systemMessages").prepend(message);
 }
-function clearForm(){
-    $("input").val("");
-}
+function clearForm(){$("input").val("");}

@@ -1,0 +1,25 @@
+/* Added custom styles for navbar in Bootstrap */
+.bg-navy {background-color: #112945 !important;}
+
+/* Custom components */
+.box{padding: 15px;margin:0;position: relative;user-select: none;-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;}
+.box-default{border: thin solid #cbcbcb;border-radius: 5px;}
+.box-classic{background: #f8f8f8;border: thin solid #cbcbcb;border-radius: 5px;}
+.box-shadow{border: thin solid #cbcbcb;border-radius: 5px;box-shadow: 3px 3px 5px #e5e5e5;}
+
+.box-sticky-green{border: thin solid #cbcbcb;background: #cfc;box-shadow: 3px 3px 5px #e5e5e5;}
+.box-sticky-yellow{border: thin solid #cbcbcb;background: #ffc;box-shadow: 3px 3px 5px #e5e5e5;}
+.box-sticky-violet{border: thin solid #cbcbcb;background: #ccf;box-shadow: 3px 3px 5px #e5e5e5;}
+
+.box-scale{border: thin solid #cbcbcb;border-radius: 5px;cursor: pointer;}
+.box-scale:hover{box-shadow: 2px 2px 5px #e9e9e9;transition: all .2s linear;transform: scale(1.02);}
+
+.box-dashed{border: thin solid #cbcbcb;border-radius: 5px;}
+.box-dashed:hover{border: thin dashed #6495ed;cursor: pointer;}
+
+/* Custom attributes */
+.rotate-left{transform: rotate(-5deg);}
+.rotate-right{transform: rotate(5deg);}
+
+.grayscale{filter: grayscale(100%);}
+.grayscale:hover{filter: none;}

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ChatApp - Login</title>
+    <title>ChatApp - Sign in</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="external-resources/web-addons.css">
     <script src="external-resources/jquery-3.3.1.min.js"></script>
@@ -14,15 +14,17 @@
 <div id="container">
 
     <!--Create user-->
-    <div id="login" class="box box-shadow frm-login">
+    <div id="signIn" class="box box-shadow frm-signin">
         <h1>Sign in to ChatApp</h1>
-        <form action="#" id="frmLogin">
+        <form action="#" id="frmSignIn">
             <p>Enter your chat's account</p>
-            <input type="text" id="txtEmail" placeholder="your-email@example.com" minlength="5" maxlength="50" required><br>
+            <input type="email" id="txtEmail" placeholder="your-email@example.com" minlength="5" maxlength="50" required><br>
+            <span id="txtEmailNotify" class="notify-error"></span><br>
             <input type="password" id="txtPassword" placeholder="your password" minlength="6" maxlength="50"  required><br>
-            <button id="btnLogin" type="button" class="button button-login">Sign in</button>
+            <span id="txtPasswordNotify" class="notify-error"></span><br>
+            <button id="btnSignIn" type="button" class="button button-signin">Sign in >></button>
         </form>
-        <a href="create-user.html">Don't have an account? Sign up here</a>
+        <a href="signup.html">Don't have an account? Sign up here</a>
     </div>
 
     <div id="dspUserInfo"></div>
@@ -31,7 +33,7 @@
 </div>
     <!-- Script -->
     <script src="scripts/config.js"></script>
-    <script src="scripts/functions.js"></script>
-    <script src="scripts/user.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/signin.js"></script>
 </body>
 </html>

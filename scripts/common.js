@@ -7,4 +7,15 @@ function writeToLogs(errorCode,errorMessage) {
 
     $("#systemMessages").prepend(message);
 }
-function clearForm(){$("input").val("");}
+
+//---------- Firebase's functions ----------
+function getUserInfo(userId) {
+    let nodeRef = database.ref().child("users/" + userId);
+    nodeRef.once("value")
+        .then(function (snapshot) {
+            $("#dspUserInfo").text(snapshot.val().displayName + " logged in");
+        })
+        .catch(function (error) {
+            writeToLogs(error.code,error.message);
+        });
+}

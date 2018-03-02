@@ -21,3 +21,27 @@ function getCurrentTime() {
 
     return addZeroToDateTime(hours) + ":" + addZeroToDateTime(minutes)  + ":" + addZeroToDateTime(seconds);
 }
+
+//---------- Validation ----------
+function validateEmailAddress(sEmail) {
+    let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(sEmail);
+}
+function limitInputLength(elementID,length) {
+    let userKeyPress = window.event ? event.which : event.keyCode;
+    if (document.getElementById(elementID).value.length === length && userKeyPress !== 8){
+        event.preventDefault();
+        return false;
+    }else
+        return true;
+}
+function forceKeyPressNumber() {
+    let userKeyPress = window.event ? event.which : event.keyCode;
+    if (userKeyPress !== 8){
+        if (userKeyPress < 48 || userKeyPress > 57){
+            event.preventDefault(); //stop the key press
+            return false;
+        }
+    }else
+        return true;
+}

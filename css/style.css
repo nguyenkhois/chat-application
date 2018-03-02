@@ -9,13 +9,13 @@ main{padding: 5px;}
 .messageError{color: #ff0000;}
 .messageSucceed{color: #008000;}
 
-/* Sign in form and sign up */
-.frm-login, .frm-create-user{width: 500px;text-align: center;}
-.frm-login input, .frm-create-user input{
+/* Sign in and sign up forms */
+.frm-signin, .frm-signup{width: 500px;text-align: center;}
+.frm-signin input, .frm-signup input{
     width: 350px;
     height: 50px;
     padding: 5px;
-    margin: 5px;
+    margin: 6px 0 0 0;
     font-size: 20px;
 
     /* Clear the user's operating system's theme */
@@ -30,7 +30,7 @@ main{padding: 5px;}
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-.frm-login input:focus, .frm-create-user input:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
+.frm-signin input:focus, .frm-signup input:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
 
 .button {
     background-color: #4CAF50; /* Green */
@@ -46,8 +46,8 @@ main{padding: 5px;}
     transition-duration: 0.4s;
     cursor: pointer;
 }
-.button-login, .button-create-user {
-    margin: 10px 10px 40px 10px;
+.button-signin, .button-signup {
+    margin: 10px 10px 30px 10px;
     width: 200px;
     background-color: #2d6aa5;
     color: #ffffff;
@@ -56,9 +56,9 @@ main{padding: 5px;}
     bottom: 10px;
     border-radius: 40px;
 }
-.button-login:hover, .button-create-user:hover {background-color: #ffffff;color: #8a8a8a;}
+.button-signin:hover, .button-signup:hover {background-color: #ffffff;color: #8a8a8a;}
 
-.frm-login a,.frm-create-user a{color: #2d6aa5; text-decoration: underline;}
-.frm-login a:hover, .frm-create-user a:hover{color: #2d6aa5; text-decoration: none;}
+.frm-signin a,.frm-signup a{color: #2d6aa5; text-decoration: underline;}
+.frm-signin a:hover, .frm-signup a:hover{color: #2d6aa5; text-decoration: none;}
 
-/* Creating user's form */
+.notify-error{color: #ff0000;font-size: 12px;}

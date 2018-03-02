@@ -1,0 +1,83 @@
+[debug] [2018-02-20T10:28:11.870Z] ----------------------------------------------------------------------
+[debug] [2018-02-20T10:28:11.873Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\me\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-02-20T10:28:11.873Z] CLI Version:   3.17.4
+[debug] [2018-02-20T10:28:11.873Z] Platform:      win32
+[debug] [2018-02-20T10:28:11.873Z] Node Version:  v9.5.0
+[debug] [2018-02-20T10:28:11.874Z] Time:          Tue Feb 20 2018 11:28:11 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:11.874Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-20T10:28:11.884Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-20T10:28:11.884Z] > authorizing via signed-in user
+[debug] [2018-02-20T10:28:11.886Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-02-20T10:28:11.886Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/Hbzsp6G4K1F8fJQdNqmTvm9N1pB_rppdnkD-L8L_bhY',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Feb 20 2018 11:28:11 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:12.067Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:12.075Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/firechat-3fcc5  
+  
+ Tue Feb 20 2018 11:28:12 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:12.809Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:12.809Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/firechat-3fcc5/tokens  
+  
+ Tue Feb 20 2018 11:28:12 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:13.662Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\me\documents\feu\firechat'...
+[info] 
+[debug] [2018-02-20T10:28:13.664Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/firechat-3fcc5  
+  
+ Tue Feb 20 2018 11:28:13 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:14.572Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:14.572Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/210046629739/clients/_:getWebAppConfig  
+  
+ Tue Feb 20 2018 11:28:14 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:15.115Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:15.169Z] TypeError: Cannot read property 'public' of undefined
+    at Server.<anonymous> (C:\Users\me\AppData\Roaming\npm\node_modules\firebase-tools\lib\serve\hosting.js:34:18)
+    at Object.onceWrapper (events.js:255:19)
+    at Server.emit (events.js:160:13)
+    at emitListeningNT (net.js:1394:10)
+    at process._tickCallback (internal/process/next_tick.js:152:19)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-02-20T10:28:34.741Z] ----------------------------------------------------------------------
+[debug] [2018-02-20T10:28:34.744Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\me\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-02-20T10:28:34.744Z] CLI Version:   3.17.4
+[debug] [2018-02-20T10:28:34.744Z] Platform:      win32
+[debug] [2018-02-20T10:28:34.744Z] Node Version:  v9.5.0
+[debug] [2018-02-20T10:28:34.745Z] Time:          Tue Feb 20 2018 11:28:34 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:34.745Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-20T10:28:34.754Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-20T10:28:34.755Z] > authorizing via signed-in user
+[debug] [2018-02-20T10:28:34.757Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/firechat-3fcc5  
+  
+ Tue Feb 20 2018 11:28:34 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:35.502Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:35.503Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/firechat-3fcc5/tokens  
+  
+ Tue Feb 20 2018 11:28:35 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:36.171Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\me\documents\feu\firechat'...
+[info] 
+[debug] [2018-02-20T10:28:36.174Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/firechat-3fcc5  
+  
+ Tue Feb 20 2018 11:28:36 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:37.018Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:37.018Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/210046629739/clients/_:getWebAppConfig  
+  
+ Tue Feb 20 2018 11:28:37 GMT+0100 (Västeuropa, normaltid)
+[debug] [2018-02-20T10:28:37.636Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-20T10:28:37.685Z] TypeError: Cannot read property 'public' of undefined
+    at Server.<anonymous> (C:\Users\me\AppData\Roaming\npm\node_modules\firebase-tools\lib\serve\hosting.js:34:18)
+    at Object.onceWrapper (events.js:255:19)
+    at Server.emit (events.js:160:13)
+    at emitListeningNT (net.js:1394:10)
+    at process._tickCallback (internal/process/next_tick.js:152:19)
+[error] 
+[error] Error: An unexpected error has occurred.

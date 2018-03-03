@@ -4,8 +4,7 @@ $(document).ready(function () {
             getUserInfo(user.uid);
         } else {
             $("#lnkSignOut").hide();
-            let $message = $("<p></p>").html("NOW! <a href='signin.html'>Sign in here</a> baby!");
-            $("#dspUserInfo").prepend($message);
+            $(location).attr('href', 'signin.html');
         }
     });
 

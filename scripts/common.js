@@ -13,9 +13,13 @@ function getUserInfo(userId) {
     let nodeRef = database.ref().child("users/" + userId);
     nodeRef.once("value")
         .then(function (snapshot) {
-            $("#dspUserInfo").text(snapshot.val().displayName + " logged in");
+            let $message = $("<p></p>").html(snapshot.val().displayName + " logged in");
+            $("#dspUserInfo").prepend($message);
         })
         .catch(function (error) {
             writeToLogs(error.code,error.message);
         });
+}
+function goToChat() {
+    $(location).attr('href', 'index.html');
 }

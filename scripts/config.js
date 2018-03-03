@@ -9,3 +9,4 @@ let config = {
 };
 firebase.initializeApp(config);
 let database = firebase.database();
+let auth = firebase.auth();

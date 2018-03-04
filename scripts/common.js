@@ -20,6 +20,5 @@ function getUserInfo(userId) {
             writeToLogs(error.code,error.message);
         });
 }
-function goToChat() {
-    $(location).attr('href', 'index.html');
-}
+function goToChat() {$(location).attr('href', 'index.html');}
+function goToSignIn() {$(location).attr('href', 'signin.html');}

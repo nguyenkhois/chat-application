@@ -1,6 +1,6 @@
 /* Added custom styles for navbar in Bootstrap */
 .bg-navy {background-color: #112945 !important;}
-
+.bg-light-blue{background-color: #6495ed !important;}
 /* Custom components */
 .box{padding: 15px;margin:0;position: relative;user-select: none;-moz-user-select: none;-ms-user-select: none;-webkit-user-select: none;}
 .box-default{border: thin solid #cbcbcb;border-radius: 5px;}

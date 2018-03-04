@@ -1,9 +1,16 @@
 /* Common styles */
 *{box-sizing: border-box;}
-body{font-family: Arial;}
+body{font-family: Arial;margin: 0;padding: 0;}
 header, main, footer{width: 100%;}
-main{padding: 5px;}
-#container{width:100%;margin: auto;padding: 0;display: flex;flex-direction: column;align-items: center;}
+#container{
+    width:100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
 /* Error messages */
 .messageError{color: #ff0000;}
@@ -46,8 +53,7 @@ main{padding: 5px;}
     transition-duration: 0.4s;
     cursor: pointer;
 }
-.button-signin, .button-signup {
-    margin: 10px 10px 30px 10px;
+.button-signin, .button-signup, .button-send-message {
     width: 200px;
     background-color: #2d6aa5;
     color: #ffffff;
@@ -56,9 +62,69 @@ main{padding: 5px;}
     bottom: 10px;
     border-radius: 40px;
 }
-.button-signin:hover, .button-signup:hover {background-color: #ffffff;color: #8a8a8a;}
+.button-signin:hover, .button-signup:hover, .button-send-message:hover {background-color: #ffffff;color: #8a8a8a;}
 
+.button-send-message:hover{}
 .frm-signin a,.frm-signup a{color: #2d6aa5; text-decoration: underline;}
 .frm-signin a:hover, .frm-signup a:hover{color: #2d6aa5; text-decoration: none;}
 
+/*Notify*/
 .notify-error{color: #ff0000;font-size: 12px;}
+
+/*Main chat page*/
+#chatApp{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+#dspPartMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+}
+#dspPartFunctions{
+    width: 300px;
+    background-color: #2d6aa5;
+    color: #cbcbcb;
+}
+
+.sendMessage{
+    padding-right: 20px;
+    height: 80px;
+    text-align: right;
+    background-color: #cfcfcf;
+}
+.sendMessage input{
+    /* Clear the user's operating system's theme */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    /* Apply own styles */
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    border: 1px solid #a1a1a1;
+    border-radius: 8px;
+
+    width: 60%;
+    margin: 20px 10px 10px 20px;
+    padding: 0 5px 0 5px;
+    height: 45px;
+    font-size: 18px;
+}
+
+.chatContent{padding: 5px}
+
+.userinfo{padding: 10px;}
+
+/*Channels*/
+.channels{padding: 10px;}
+.channel-item{cursor: pointer;color: #deb887;}
+.channel-item:hover{text-decoration: underline;}
+
+/*User list*/
+.userlist{padding: 10px;}
+.userlist-online{color: #87cefa;}

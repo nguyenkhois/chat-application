@@ -12,15 +12,33 @@
 <body>
     <div id="container">
 
+        <div id="chatApp">
+            <div id="dspPartMain">
+                <div id="chatContents" class="chatContent">Chat contents</div>
+                <div id="sendMessage" class="sendMessage">
+                    <form action="#">
+                    <span id="dspCurrentChannel"></span><input id="txtSendMessage" type="text" maxlength="200">
+                    <button id="btnSend" class="button button-send-message">Send</button>
+                    </form>
+                </div>
+            </div>
 
-        <div id="dspUserInfo"></div>
+            <div id="dspPartFunctions">
+                <div id="dspUserInfo" class="userinfo">
+                    <p>Current user info</p>
+                    <p><a href="signout.html">Sign out</a></p>
+                </div>
+
+                <div id="dspChannels" class="channels"></div>
+                <div id="dspUserList" class="userlist">List of all user</div>
+            </div>
+        </div>
+
         <div id="systemMessages"></div>
-
-        <p><a href="signout.html">Sign out</a></p>
     </div>
 
     <!-- Script -->
-     <script src="scripts/config.js"></script>
+    <script src="scripts/config.js"></script>
     <script src="scripts/common.js"></script>
     <script src="scripts/chatapp.js"></script>
 </body>

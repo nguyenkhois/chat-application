@@ -17,7 +17,7 @@ function getUserInfo(userId) {
             $("#dspUserInfo").prepend($message);
         })
         .catch(function (error) {
-            writeToLogs(error.code,error.message);
+            writeToLogs(error.code,"Getting user info: "+error.message);
         });
 }
 function goToChat() {$(location).attr('href', 'index.html');}

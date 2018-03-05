@@ -81,7 +81,7 @@ $(document).ready(function(){
                 //Creating new user is successfully
                 goToChat();//Redirect to chat page
             })
-            .catch(function (error) {writeToLogs(error.code,"Creating new user in own Firebase database: "+error.message);});
+            .catch(function (error) {writeToLogs(error.code,"fnCreateUserInAppDb: "+error.message);});
     }
     function createUser(email, password, displayName, phoneNumber, photoUrl) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -89,9 +89,9 @@ $(document).ready(function(){
                 //Login
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function () {createUserInAppDb(auth.currentUser.uid,displayName,phoneNumber,photoUrl);})
-                    .catch(function(error) {writeToLogs(error.code,"Sign in: "+error.message);});
+                    .catch(function(error) {writeToLogs(error.code,"fnCreateUser/SignIn: "+error.message);});
             })
-            .catch(function(error) {writeToLogs(error.code,"Creating new user in Firebase system: "+error.message);});
+            .catch(function(error) {writeToLogs(error.code,"fnCreateUser: "+error.message);});
     }
 });
 

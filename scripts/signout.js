@@ -10,6 +10,7 @@ $(document).ready(function() {
                     auth.signOut()
                         .then(function () {
                             $("#dspUserInfo").text("Sign-out successful");
+                            removeLocalStoredData();//Remove channelId in sessionStorage
                             goToSignIn();
                         })
                         .catch(function (error) {

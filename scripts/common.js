@@ -16,9 +16,19 @@ function getUserInfo(userId) {
             let $message = $("<p></p>").html(snapshot.val().displayName + " logged in");
             $("#dspUserInfo").prepend($message);
         })
-        .catch(function (error) {
-            writeToLogs(error.code,"Getting user info: "+error.message);
-        });
+        .catch(function (error) {writeToLogs(error.code,"fnGetUserInfo: "+error.message);});
 }
 function goToChat() {$(location).attr('href', 'index.html');}
 function goToSignIn() {$(location).attr('href', 'signin.html');}
+function setDefaultChannel() {
+    if (typeof(Storage) !== "undefined")
+        sessionStorage.chatappChannelId = 1;
+    else
+        return false;
+}
+function removeLocalStoredData() {
+    if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId)
+        sessionStorage.removeItem("chatappChannelId");
+    else
+        return false
+}

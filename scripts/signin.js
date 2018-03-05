@@ -9,7 +9,7 @@ $(document).ready(function(){
         }
     });
 
-    //Functions
+    //FUNCTIONS
     function goToSignIn() {
         //Get HTML DOM elements and access several times.
         let eleEmail = $("#txtEmail");
@@ -27,13 +27,13 @@ $(document).ready(function(){
 
         //Begin sign in process
         btnSignIn.click(function () {
-            //Check form -true-> Sign in if all input data are good
+            //Form validation ---if it returns true---> Sign in
             if (checkFormSignIn(eleEmail, elePassword))
                 signIn(eleEmail.val(), elePassword.val());
         });
     }
     function checkFormSignIn(eleEmail, elePassword) {
-        //Form's validation
+        //Form validation
         if (eleEmail.val().length < 6 || validateEmailAddress(eleEmail.val()) === false) {
             $("#txtEmailNotify").text("Email must be at least 6 characters and have @");
             eleEmail.focus();
@@ -48,9 +48,10 @@ $(document).ready(function(){
     function signIn(email, password) {
         auth.signInWithEmailAndPassword(email, password)
             .then(function () {
+                //User is signed in.
                 let user = auth.currentUser;
                 if (user){
-                    //User is signed in.
+                    //Update user state in Firebase database (online/ offline)
                     let nodeRef = database.ref("users/" + user.uid);
                     nodeRef.update({isOnline: true})
                         .then(function () {
@@ -67,12 +68,12 @@ $(document).ready(function(){
                                     lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
                                 }
                             });*/
-
+                            setDefaultChannel(); //Set default channelId for chat
                             goToChat();//Redirect to chat page
                         })
-                        .catch(function(error) {writeToLogs(error.code, error.message);});
+                        .catch(function(error) {writeToLogs(error.code, "fnUpdateUserState: "+error.message);});
                 }
             })
-            .catch(function (error) {writeToLogs(error.code, error.message);});
+            .catch(function (error) {writeToLogs(error.code, "fnSignIn: "+error.message);});
     }
 });

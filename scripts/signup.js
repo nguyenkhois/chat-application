@@ -18,22 +18,27 @@ $(document).ready(function(){
         goToSignUp();
     }
 
-    //Functions
-    function goToSignUp() {
-        //Get HTML DOM elements and access several times
-        let eleEmail = $("#txtEmail");
-        let elePassword = $("#txtPassword");
-        let eleDisplayName = $("#txtDisplayName");
-        let elePhoneNumber = $("#txtPhoneNumber");
-        let elePhotoUrl = $("#txtPhotoUrl");
-        let btnSignUp = $("#btnSignUp");
+    //FUNCTIONS
+    //Get HTML DOM elements and access several times
+    let eleEmail = $("#txtEmail");
+    let txtEmailNotify = $("#txtEmailNotify");
+    let elePassword = $("#txtPassword");
+    let txtPasswordNotify = $("#txtPasswordNotify");
+    let eleDisplayName = $("#txtDisplayName");
+    let txtDisplayNameNotify = $("#txtDisplayNameNotify");
+    let elePhoneNumber = $("#txtPhoneNumber");
+    let txtPhoneNumberNotify = $("#txtPhoneNumberNotify");
+    let elePhotoUrl = $("#txtPhotoUrl");
+    let txtPhotoUrlNotify = $("#txtPhotoUrlNotify");
+    let btnSignUp = $("#btnSignUp");
 
+    function goToSignUp() {
         //Clear all error messages
-        eleEmail.on('input',function(){$("#txtEmailNotify").text("");});
-        elePassword.on('input',function(){$("#txtPasswordNotify").text("");});
-        eleDisplayName.on('input',function(){$("#txtDisplayNameNotify").text("");});
-        elePhoneNumber.on('input',function(){$("#txtPhoneNumberNotify").text("");});
-        elePhotoUrl.on('input',function(){$("#txtPhotoUrlNotify").text("");});
+        eleEmail.on('input',function(){txtEmailNotify.text("");});
+        elePassword.on('input',function(){txtPasswordNotify.text("");});
+        eleDisplayName.on('input',function(){txtDisplayNameNotify.text("");});
+        elePhoneNumber.on('input',function(){txtPhoneNumberNotify.text("");});
+        elePhotoUrl.on('input',function(){txtPhotoUrlNotify.text("");});
 
         //Handle enter key (keycode === 13)
         $(document).keydown(function (event) {if (event.keyCode === 13){btnSignUp.click();}});
@@ -47,24 +52,24 @@ $(document).ready(function(){
     }
     function checkFormSignUp(eleEmail,elePassword,eleDisplayName,elePhoneNumber,elePhotoUrl) {
         if (eleEmail.val().length < 6 || validateEmailAddress(eleEmail.val()) === false){
-            $("#txtEmailNotify").text("Email must be at least 6 characters and have @");
+            txtEmailNotify.text("Email must be at least 6 characters and have @");
             eleEmail.focus();
             return false;
         }else if (elePassword.val().length < 6){
-            $("#txtPasswordNotify").text("Password must be at least 6 characters");
+            txtPasswordNotify.text("Password must be at least 6 characters");
             elePassword.focus();
             return false;
         }else if(eleDisplayName.val().length < 6){
-            $("#txtDisplayNameNotify").text("Display name must be at least 6 characters");
+            txtDisplayNameNotify.text("Display name must be at least 6 characters");
             eleDisplayName.focus();
             return false;
         }else if(elePhoneNumber.val().length > 0 && elePhoneNumber.val().length < 6){
-            $("#txtPhoneNumberNotify").text("Telephone number must be at least 6 characters");
+            txtPhoneNumberNotify.text("Telephone number must be at least 6 characters");
             elePhoneNumber.focus();
             return false;
         }
         else if(elePhotoUrl.val().length > 0 && elePhotoUrl.val().length < 10){
-            $("#txtPhotoUrlNotify").text("Photo URL must be at least 10 characters and have http://");
+            txtPhotoUrlNotify.text("Photo URL must be at least 10 characters and have http://");
             elePhotoUrl.focus();
             return false;
         }

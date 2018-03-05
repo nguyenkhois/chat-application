@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    let dspChannels = $("#dspChannels");
+    let dspCurrentChannel = $("#dspCurrentChannel");
+    let dspUserList = $("#dspUserList");
+    let txtMessage = $("#txtMessage");
+    let chatContents = $("#chatContents");
+    let btnSend = $("#btnSend");
+
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
@@ -11,8 +18,8 @@ $(document).ready(function () {
             console.log(channelId);
             getMessages(channelId);
 
-            $("#txtMessage").focus();
-            $("#btnSend").click(function(){sendAMessage(user);});
+            txtMessage.focus();
+            btnSend.click(function(){sendAMessage(user);});
 
             //Handle enter key (keycode === 13)
             $(document).keypress(function(e) {
@@ -32,24 +39,24 @@ $(document).ready(function () {
     function getChannels() {
         let nodeRef = database.ref("channels/").orderByChild("channelName");
         nodeRef.on('value',function (snapshot) {
-            $("#dspChannels").html("<h3>Channels</h3>");//clear the display before get new data
+            dspChannels.html("<h3>Channels</h3>");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
+                //Build a channel link
                 buildAChannelLink(childSnapshot.val(),childSnapshot.key);
             });
         });
     }
     function buildAChannelLink(objData, objKey) {
-        let channelLink = $("<p>").addClass("channel-item").text("#"+objData.channelName);
-        $("#dspChannels").append(channelLink);
-
-        $(channelLink).click(function () {
-            storeChannel(objKey,objData.channelName);
-        });
+        let channelLink = $("<p>")
+            .addClass("channel-item")
+            .text("#"+objData.channelName)
+            .click(function () {storeChannel(objKey,objData.channelName)});
+        dspChannels.append(channelLink);
     }
     function storeChannel(channelId,channelName) {
         if (typeof(Storage) !== "undefined") {
             sessionStorage.chatappChannelId = channelId;
-            $("#dspCurrentChannel").text("# "+channelName);
+            dspCurrentChannel.text("# "+channelName);
             getMessages(channelId);//reload all messages which are in the chosen channel
         }
     }
@@ -67,20 +74,19 @@ $(document).ready(function () {
     function getUserList() {
         let nodeRef = database.ref("users/").orderByChild("displayName");
         nodeRef.on('value',function (snapshot) {
-            $("#dspUserList").html("<h3>Members</h3>");//clear the display before get new data
+            dspUserList.html("<h3>Members</h3>");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
                 buildAnUser(childSnapshot.val());
             });
         });
     }
     function buildAnUser(objData) {
-        let userState = objData.isOnline;
         let aname = $("<p>").text(objData.displayName);
 
-        if (userState)
+        if (objData.isOnline)
             aname.addClass("userlist-online");
 
-        $("#dspUserList").append(aname);
+        dspUserList.append(aname);
     }
 
     //Messages
@@ -89,7 +95,7 @@ $(document).ready(function () {
             let channelId = retrieveChannel();
             let newKey = database.ref("messages/").push().key;
             let nodeRef = database.ref("messages/" + newKey);
-            let message = $("#txtMessage").val();
+            let message = txtMessage.val();
 
             nodeRef.set({
                 userId: user.uid,
@@ -97,7 +103,7 @@ $(document).ready(function () {
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()
                 })
-                .then(function () {$("#txtMessage").val("");})
+                .then(function () {txtMessage.val("");})
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
         }
         else{return false;}
@@ -106,7 +112,7 @@ $(document).ready(function () {
         if (parseInt(channelId)){
             let nodeRef = database.ref("messages/").orderByChild("channelId").equalTo(channelId);
             nodeRef.on('value',function (snapshot) {
-                $("#chatContents").html("");//clear the display before get new data
+                chatContents.html("");//clear the display before get new data
                 snapshot.forEach(function (childSnapshot) {
                     buildAMessage(childSnapshot.val());
                 });
@@ -116,6 +122,6 @@ $(document).ready(function () {
     }
     function buildAMessage(objData) {
         let message = $("<p>").html(objData.content);
-        $("#chatContents").append(message);
+        chatContents.append(message);
     }
 });

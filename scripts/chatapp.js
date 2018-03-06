@@ -23,7 +23,8 @@ $(document).ready(function () {
             let objDefaultChannel = getDefaultChannel();
             let objResult = objDefaultChannel.then(function (result) {
                 let defaultChannelId = Object.keys(result)[0];
-                getMessages(defaultChannelId);
+                let defaultChannelName = result[defaultChannelId].channelName;
+                storeChannel(defaultChannelId,defaultChannelName);
             });
 
             //Assign onclick function to button Send end Enter key

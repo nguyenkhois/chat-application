@@ -4,14 +4,14 @@
 
 
 # Changelogs
-## Alpha 2 version (2018-03-07)
+## Alpha 2 (2018-03-07)
 * Fix bugs for chat page
    * Default channel works fine
    * Enter key works fine
    * Improved JS code for effect and speed
 * Added installation tools for ChatApp
 
-## Alpha 1 version (2018-03-05)
+## Alpha 1 (2018-03-05)
 * Created basic functions
   * sign in
   * sign up
@@ -21,3 +21,5 @@
 
 # References
 * [Wiki on GitHub](https://github.com/nguyenkhois/chat-application/wiki)
+* [Software release life cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
+* [Semantic Versioning 2.0.0](https://semver.org/)

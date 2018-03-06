@@ -9,6 +9,8 @@
    * Default channel works fine
    * Enter key works fine
    * Improved JS code for effect and speed
+* Added installation tools for ChatApp
+
 ## Alpha 1 version (2018-03-05)
 * Created basic functions
   * sign in

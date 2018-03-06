@@ -5,25 +5,33 @@ $(document).ready(function () {
     let txtMessage = $("#txtMessage");
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
+    let chatApp = $("#chatApp");
 
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
+
+            //Show ChatApp content
+            chatApp.removeClass("chatApp-hidden");
+
+            //Get components
             getUserInfo(user.uid);
             getChannels();
             getUserList();
 
             //Get messages in default channel
-            let channelId = retrieveChannel();
-            console.log(channelId);
-            getMessages(channelId);
+            let objDefaultChannel = getDefaultChannel();
+            let objResult = objDefaultChannel.then(function (result) {
+                let defaultChannelId = Object.keys(result)[0];
+                getMessages(defaultChannelId);
+            });
 
-            txtMessage.focus();
+            //Assign onclick function to button Send end Enter key
             btnSend.click(function(){sendAMessage(user);});
 
-            //Handle enter key (keycode === 13)
-            $(document).keypress(function(e) {
-                let keycode = (e.keyCode ? e.keyCode : e.which);
+            //Handle enter key
+            $(document).keydown(function(event) {
+                let keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode === '13')
                     sendAMessage(user);
             });
@@ -41,7 +49,6 @@ $(document).ready(function () {
         nodeRef.on('value',function (snapshot) {
             dspChannels.html("<h3>Channels</h3>");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
-                //Build a channel link
                 buildAChannelLink(childSnapshot.val(),childSnapshot.key);
             });
         });
@@ -49,7 +56,7 @@ $(document).ready(function () {
     function buildAChannelLink(objData, objKey) {
         let channelLink = $("<p>")
             .addClass("channel-item")
-            .text("#"+objData.channelName)
+            .text("# "+objData.channelName)
             .click(function () {storeChannel(objKey,objData.channelName)});
         dspChannels.append(channelLink);
     }
@@ -61,13 +68,18 @@ $(document).ready(function () {
         }
     }
     function retrieveChannel() {
-        if (typeof(Storage) !== "undefined"){
-            if (sessionStorage.chatappChannelId)
-                return sessionStorage.chatappChannelId;
-            else
-                return false;
+        if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId){
+            return sessionStorage.chatappChannelId;
         }else
-            return false;
+            return false
+    }
+    function getDefaultChannel() {
+        let nodeRef = database.ref("channels/").orderByChild("defaultChannel").equalTo(true);
+        return nodeRef.once("value")
+                    .then(function (snapshot) {
+                        return snapshot.val();
+                    })
+                    .catch(function () {});
     }
 
     //Users
@@ -81,12 +93,12 @@ $(document).ready(function () {
         });
     }
     function buildAnUser(objData) {
-        let aname = $("<p>").text(objData.displayName);
+        let displayName = $("<p>").text(objData.displayName);
 
         if (objData.isOnline)
-            aname.addClass("userlist-online");
+            displayName.addClass("userlist-online");
 
-        dspUserList.append(aname);
+        dspUserList.append(displayName);
     }
 
     //Messages
@@ -106,7 +118,7 @@ $(document).ready(function () {
                 .then(function () {txtMessage.val("");})
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
         }
-        else{return false;}
+        else{return false}
     }
     function getMessages(channelId) {
         if (parseInt(channelId)){
@@ -117,8 +129,9 @@ $(document).ready(function () {
                     buildAMessage(childSnapshot.val());
                 });
             });
+            txtMessage.focus();
         }
-        else{return false;}
+        else{return false}
     }
     function buildAMessage(objData) {
         let message = $("<p>").html(objData.content);

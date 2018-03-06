@@ -78,6 +78,7 @@ header, main, footer{width: 100%;}
     width: 100%;
     height: 100vh;
 }
+.chatApp-hidden{visibility: hidden;}
 #dspPartMain{
     display: flex;
     flex-direction: column;

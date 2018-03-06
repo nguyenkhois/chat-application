@@ -39,6 +39,8 @@ header, main, footer{width: 100%;}
 }
 .frm-signin input:focus, .frm-signup input:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
 
+#frmSignIn,#frmSignUp{margin-bottom: 20px;}
+
 .button {
     background-color: #4CAF50; /* Green */
     border: none;

@@ -4,7 +4,12 @@
 
 
 # Changelogs
-## Alpha version (2018-03-05)
+## Alpha 2 version (2018-03-07)
+* Fix bugs for chat page
+   * Default channel works fine
+   * Enter key works fine
+   * Improved JS code for effect and speed
+## Alpha 1 version (2018-03-05)
 * Created basic functions
   * sign in
   * sign up

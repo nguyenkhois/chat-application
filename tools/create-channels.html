@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tools - Creating channels</title>
+    <script src="../external-resources/jquery-3.3.1.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+</head>
+<body>
+    <div id="dspSystemMessage"></div>
+
+    <script src="../scripts/config.js"></script>
+    <script>
+        $(document).ready(function () {
+            let nodeRef = database.ref("channels2/" + 1);
+            nodeRef.set({channelName:"general",defaultChannel:true})
+                .then(function () {$("#dspSystemMessage").append("<p>Created channel #general</p>");})
+                .catch(function () {});
+
+            let nodeRef2 = database.ref("channels2/" + 2);
+            nodeRef2.set({channelName:"street food",defaultChannel:false})
+                .then(function () {$("#dspSystemMessage").append("<p>Created channel #street food</p>");})
+                .catch(function () {});
+
+            let nodeRef3 = database.ref("channels2/" + 3);
+            nodeRef3.set({channelName:"tourism",defaultChannel:false})
+                .then(function () {$("#dspSystemMessage").append("<p>Created channel #tourism</p>");})
+                .catch(function () {});
+        });
+    </script>
+</body>
+</html>

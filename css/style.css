@@ -119,9 +119,11 @@ header, main, footer{width: 100%;}
     font-size: 18px;
 }
 
-.chatContents{padding: 5px}
+.chatContents{padding: 5px;overflow-y: scroll;}
 
-.userinfo{padding: 10px;}
+.userinfo{padding: 10px;text-align: center;}
+.userinfo a{text-decoration: none; color: #cbcbcb;}
+.userinfo a:hover{text-decoration: underline;}
 
 /*Channels*/
 .channels{padding: 10px;}

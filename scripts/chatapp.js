@@ -14,6 +14,7 @@ $(document).ready(function () {
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(user.displayName);
             dspCurrentUser.append(currentUserDisplayName);
+            dspCurrentUser.prepend("<p><img src='images/icon-user.png'></p>");
 
             //Show ChatApp content
             chatApp.removeClass("chatApp-hidden");

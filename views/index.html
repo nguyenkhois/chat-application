@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" manifest="manifest.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatApp - Chat now...</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="external-resources/web-addons.css">
+    <script src="external-resources/jquery-3.3.1.min.js"></script>
+    <script src="external-resources/web-addons.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+<body>
+    <div id="container">
+
+        <div id="chatApp" class="chatApp-hidden">
+            <div id="dspPartMain">
+                <div id="logga">
+                    <div>
+                        <span id="logotyp">Chat <i class="far fa-comment"></i></span>
+                    </div>
+                </div>
+
+                <div id="chatContents" class="chatContents">Tips! Choose a channel on the right panel!</div>
+                <div id="sendMessage" class="sendMessage">
+                    <form action="#">
+                    <span id="dspCurrentChannel"></span><input id="txtMessage" type="text" maxlength="200">
+                    <button id="btnSend" class="button button-send-message">Send</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="dspPartFunctions">
+                <div id="dspUserInfo" class="userinfo">
+                    <p id="dspCurrentUser"></p>
+                    <p><a href="signout.html">Sign out</a></p>
+                </div>
+
+                <div id="dspChannels" class="channels"></div>
+                <div id="dspUserList" class="userlist">List of all user</div>
+            </div>
+        </div>
+
+        <div id="systemMessages"></div>
+    </div>
+
+    <!-- Script -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/chatapp.js"></script>
+</body>
+</html>

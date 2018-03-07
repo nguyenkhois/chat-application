@@ -13,7 +13,7 @@ knapp.addEventListener("click", function(event) {
 
         })
         .catch(function (error) {
-            paragraf.innerHTML(error.code, "fnSignIn: "+error.message);
+            paragraf.innerHTML = "Error: " + error.message;
         });
 
 });

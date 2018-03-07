@@ -131,6 +131,8 @@ $(document).ready(function () {
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
         }
         else{return false}
+        txtMessage.focus();
+        chatContents.scrollTop(chatContents[0].scrollHeight);//auto scroll down to bottom
     }
     function getMessages(channelId) {
         if (parseInt(channelId)){
@@ -141,9 +143,10 @@ $(document).ready(function () {
                     buildAMessage(childSnapshot.val());
                 });
             });
-            txtMessage.focus();
         }
         else{return false}
+        txtMessage.focus();
+        chatContents.scrollTop(chatContents[0].scrollHeight);//auto scroll down to bottom
     }
     function buildAMessage(objData) {
         let displayName = $("<b>").text(objData.displayName);

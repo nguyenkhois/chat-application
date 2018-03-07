@@ -9,15 +9,6 @@ function writeToLogs(errorCode,errorMessage) {
 }
 
 //---------- Firebase's functions ----------
-function getUserInfo(userId) {
-    let nodeRef = database.ref().child("users/" + userId);
-    nodeRef.once("value")
-        .then(function (snapshot) {
-            let $message = $("<p></p>").html(snapshot.val().displayName + " logged in");
-            $("#dspUserInfo").prepend($message);
-        })
-        .catch(function (error) {writeToLogs(error.code,"fnGetUserInfo: "+error.message);});
-}
 function goToChat() {$(location).attr('href', 'index.html');}
 function goToSignIn() {$(location).attr('href', 'signin.html');}
 function removeLocalStoredData() {

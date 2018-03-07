@@ -4,8 +4,8 @@ let paragraf = document.getElementById("paragraf");
 
 knapp.addEventListener("click", function(event) {
     event.preventDefault();
-    let email = document.getElementById("emaillogin").value;
-    let password = document.getElementById("passwordlogin").value;
+    let email = document.getElementById("username").value;
+    let password = document.getElementById("pass").value;
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(loginuser){

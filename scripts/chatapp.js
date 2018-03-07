@@ -21,7 +21,7 @@ $(document).ready(function () {
 
             //Get messages in default channel
             let objDefaultChannel = getDefaultChannel();
-            let objResult = objDefaultChannel.then(function (result) {
+            objDefaultChannel.then(function (result) {
                 let defaultChannelId = Object.keys(result)[0];
                 let defaultChannelName = result[defaultChannelId].channelName;
                 storeChannel(defaultChannelId,defaultChannelName);
@@ -112,6 +112,7 @@ $(document).ready(function () {
 
             nodeRef.set({
                 userId: user.uid,
+                displayName: user.displayName,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()
@@ -135,7 +136,9 @@ $(document).ready(function () {
         else{return false}
     }
     function buildAMessage(objData) {
-        let message = $("<p>").html(objData.content);
+        let displayName = $("<b>").text(objData.displayName);
+        let message = $("<p>").html(": " + objData.content);
+        message.prepend(displayName);
         chatContents.append(message);
     }
 });

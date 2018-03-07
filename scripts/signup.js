@@ -1,24 +1,4 @@
 $(document).ready(function(){
-    /*auth.onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-            goToChat();
-        } else {
-            // No user is signed in.
-            goToSignUp();
-        }
-    });*/
-
-    let user = auth.currentUser;
-    if (user) {
-        // User is signed in.
-        goToChat();
-    } else {
-        // No user is signed in.
-        goToSignUp();
-    }
-
-    //FUNCTIONS
     //Get HTML DOM elements and access several times
     let eleEmail = $("#txtEmail");
     let txtEmailNotify = $("#txtEmailNotify");
@@ -32,6 +12,17 @@ $(document).ready(function(){
     let txtPhotoUrlNotify = $("#txtPhotoUrlNotify");
     let btnSignUp = $("#btnSignUp");
 
+    //MAIN
+    let user = auth.currentUser;
+    if (user) {
+        // User is signed in.
+        goToChat();
+    } else {
+        // No user is signed in.
+        goToSignUp();
+    }
+
+    //FUNCTIONS
     function goToSignUp() {
         //Clear all error messages
         eleEmail.on('input',function(){txtEmailNotify.text("");});
@@ -93,7 +84,16 @@ $(document).ready(function(){
             .then(function() {
                 //Login
                 auth.signInWithEmailAndPassword(email, password)
-                    .then(function () {createUserInAppDb(auth.currentUser.uid,displayName,phoneNumber,photoUrl);})
+                    .then(function () {
+                        //Update profile
+                        let user = auth.currentUser;
+                        user.updateProfile({
+                            displayName: displayName
+                        }).then(function() {
+                            // Update successful.
+                            createUserInAppDb(auth.currentUser.uid,displayName,phoneNumber,photoUrl);
+                        }).catch(function(error) {writeToLogs(error.code,"fnCreateUser: "+error.message);});
+                    })
                     .catch(function(error) {writeToLogs(error.code,"fnCreateUser/SignIn: "+error.message);});
             })
             .catch(function(error) {writeToLogs(error.code,"fnCreateUser: "+error.message);});

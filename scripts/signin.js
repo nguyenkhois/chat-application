@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    //Get HTML DOM elements and access several times.
+    let eleEmail = $("#txtEmail");
+    let txtEmailNotify = $("#txtEmailNotify");
+    let elePassword = $("#txtPassword");
+    let txtPasswordNotify = $("#txtPasswordNotify");
+    let btnSignIn = $("#btnSignIn");
+
+    //MAIN
     auth.onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -10,13 +18,6 @@ $(document).ready(function(){
     });
 
     //FUNCTIONS
-    //Get HTML DOM elements and access several times.
-    let eleEmail = $("#txtEmail");
-    let txtEmailNotify = $("#txtEmailNotify");
-    let elePassword = $("#txtPassword");
-    let txtPasswordNotify = $("#txtPasswordNotify");
-    let btnSignIn = $("#btnSignIn");
-
     function goToSignIn() {
         eleEmail.focus();
 

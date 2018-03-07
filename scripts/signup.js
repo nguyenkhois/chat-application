@@ -87,10 +87,9 @@ $(document).ready(function(){
                     .then(function () {
                         //Update profile
                         let user = auth.currentUser;
-                        user.updateProfile({
-                            displayName: displayName
-                        }).then(function() {
-                            // Update successful.
+                        user.updateProfile({displayName: displayName})
+                        .then(function() {
+                            //Create user in Firebase database when updating successful
                             createUserInAppDb(auth.currentUser.uid,displayName,phoneNumber,photoUrl);
                         }).catch(function(error) {writeToLogs(error.code,"fnCreateUser: "+error.message);});
                     })

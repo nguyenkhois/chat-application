@@ -2,6 +2,7 @@ $(document).ready(function () {
     let dspChannels = $("#dspChannels");
     let dspCurrentChannel = $("#dspCurrentChannel");
     let dspUserList = $("#dspUserList");
+    let dspCurrentUser = $("#dspCurrentUser");
     let txtMessage = $("#txtMessage");
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
@@ -10,12 +11,14 @@ $(document).ready(function () {
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
+            //Get current user display name
+            let currentUserDisplayName = $("<b>").text(user.displayName);
+            dspCurrentUser.append(currentUserDisplayName);
 
             //Show ChatApp content
             chatApp.removeClass("chatApp-hidden");
 
             //Get components
-            getUserInfo(user.uid);
             getChannels();
             getUserList();
 
@@ -137,8 +140,11 @@ $(document).ready(function () {
     }
     function buildAMessage(objData) {
         let displayName = $("<b>").text(objData.displayName);
-        let message = $("<p>").html(": " + objData.content);
+        let message = $("<p>").html(": " + objData.content + " ");
+        let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
         message.prepend(displayName);
+        message.append(timeStamp);
+
         chatContents.append(message);
     }
 });

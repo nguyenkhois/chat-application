@@ -4,6 +4,9 @@
 
 
 # Changelogs
+## Beta 1 (2018-03-07)
+* Added display name for messages
+
 ## Alpha 2 (2018-03-07)
 * Fix bugs for chat page
    * Default channel works fine

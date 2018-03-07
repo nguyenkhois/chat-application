@@ -17,12 +17,12 @@
                 .then(function () {$("#dspSystemMessage").append("<p>Created channel #general</p>");})
                 .catch(function () {});
 
-            let nodeRef2 = database.ref("channels2/" + 2);
+            let nodeRef2 = database.ref("channels/" + 2);
             nodeRef2.set({channelName:"street food",defaultChannel:false})
                 .then(function () {$("#dspSystemMessage").append("<p>Created channel #street food</p>");})
                 .catch(function () {});
 
-            let nodeRef3 = database.ref("channels2/" + 3);
+            let nodeRef3 = database.ref("channels/" + 3);
             nodeRef3.set({channelName:"tourism",defaultChannel:false})
                 .then(function () {$("#dspSystemMessage").append("<p>Created channel #tourism</p>");})
                 .catch(function () {});

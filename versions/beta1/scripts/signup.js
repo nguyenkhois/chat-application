@@ -13,42 +13,14 @@ $(document).ready(function(){
     let btnSignUp = $("#btnSignUp");
 
     //MAIN
-    auth.onAuthStateChanged(function(user) {
-        if (user) {
-            // User is signed in.
-            //Store current user info to localStorage and reuse after
-            let objUserInfo = {};
-            let nodeRef = database.ref("users/" + user.uid);
-            nodeRef.once("value")
-                .then(function (snapshot) {
-                    //Create object objUserInfo
-                    objUserInfo = {
-                        userId: user.uid,
-                        displayName: snapshot.val().displayName,
-                        phoneNumber: snapshot.val().phoneNumber,
-                        photoUrl: snapshot.val().photoUrl};
-
-                    //Store to localStorage
-                    if (typeof(Storage) !== "undefined")
-                        localStorage.chatappUserInfo = JSON.stringify(objUserInfo);
-
-                    //Redirect to the chat page
-                    goToChat();
-                })
-                .catch(function (error) {writeToLogs(error.code,error.message);});
-        } else {
-            // No user is signed in.
-            goToSignUp();
-        }
-    });
-    /*let user = auth.currentUser;
+    let user = auth.currentUser;
     if (user) {
         // User is signed in.
         goToChat();
     } else {
         // No user is signed in.
         goToSignUp();
-    }*/
+    }
 
     //FUNCTIONS
     function goToSignUp() {

@@ -11,16 +11,10 @@ $(document).ready(function () {
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
-            //Get user information form localStorage
-            let objCurrentUserInfo = retrieveCurrentUserInfo();
-
-            //Get current user display name and photo
-            let currentUserDisplayName = $("<p>").html("<b>"+objCurrentUserInfo.displayName+"</b>");
-            let photoUrl = objCurrentUserInfo.photoUrl;
-            if (photoUrl === '')
-                photoUrl = "images/icon-user.png"; //default image
-            let currentUserPhoto = $("<img>").attr("src",photoUrl);
-            dspCurrentUser.append(currentUserPhoto, currentUserDisplayName);
+            //Get current user display name
+            let currentUserDisplayName = $("<b>").text(user.displayName);
+            dspCurrentUser.append(currentUserDisplayName);
+            dspCurrentUser.prepend("<p><img src='images/icon-user.png'></p>");
 
             //Show ChatApp content
             chatApp.removeClass("chatApp-hidden");
@@ -38,13 +32,13 @@ $(document).ready(function () {
             });
 
             //Assign onclick function to button Send end Enter key
-            btnSend.click(function(){sendAMessage(user,objCurrentUserInfo);});
+            btnSend.click(function(){sendAMessage(user);});
 
             //Handle enter key
             $(document).keydown(function(event) {
                 let keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode === '13')
-                    sendAMessage(user,objCurrentUserInfo);
+                    sendAMessage(user);
             });
         } else {
             // No user is signed in.
@@ -73,14 +67,14 @@ $(document).ready(function () {
     }
     function storeChannel(channelId,channelName) {
         if (typeof(Storage) !== "undefined") {
-            localStorage.chatappChannelId = channelId;
+            sessionStorage.chatappChannelId = channelId;
             dspCurrentChannel.text("# "+channelName);
             getMessages(channelId);//reload all messages which are in the chosen channel
         }
     }
     function retrieveChannel() {
-        if (typeof(Storage) !== "undefined" && localStorage.chatappChannelId){
-            return localStorage.chatappChannelId;
+        if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId){
+            return sessionStorage.chatappChannelId;
         }else
             return false
     }
@@ -113,7 +107,7 @@ $(document).ready(function () {
     }
 
     //Messages
-    function sendAMessage(user,objCurrentUserInfo) {
+    function sendAMessage(user) {
         if (user){
             let channelId = retrieveChannel();
             let newKey = database.ref("messages/").push().key;
@@ -121,8 +115,8 @@ $(document).ready(function () {
             let message = txtMessage.val();
 
             nodeRef.set({
-                userId: objCurrentUserInfo.userId,
-                displayName: objCurrentUserInfo.displayName,
+                userId: user.uid,
+                displayName: user.displayName,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()

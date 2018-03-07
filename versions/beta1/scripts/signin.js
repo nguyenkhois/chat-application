@@ -10,26 +10,7 @@ $(document).ready(function(){
     auth.onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            //Store current user info to localStorage and reuse after
-            let objUserInfo = {};
-            let nodeRef = database.ref("users/" + user.uid);
-            nodeRef.once("value")
-                .then(function (snapshot) {
-                    //Create object objUserInfo
-                    objUserInfo = {
-                        userId: user.uid,
-                        displayName: snapshot.val().displayName,
-                        phoneNumber: snapshot.val().phoneNumber,
-                        photoUrl: snapshot.val().photoUrl};
-
-                    //Store to localStorage
-                    if (typeof(Storage) !== "undefined")
-                        localStorage.chatappUserInfo = JSON.stringify(objUserInfo);
-
-                    //Redirect to the chat page
-                    goToChat();
-                })
-                .catch(function (error) {writeToLogs(error.code,error.message);});
+            goToChat();
         } else {
             // No user is signed in.
             goToSignIn();
@@ -71,14 +52,30 @@ $(document).ready(function(){
         auth.signInWithEmailAndPassword(email, password)
             .then(function () {
                 //User is signed in.
-                //Update user state in Firebase database
                 let user = auth.currentUser;
-                let nodeRef = database.ref("users/" + user.uid);
-                nodeRef.update({isOnline: true})
-                    .then(function () {
-                        //Updated user state successfully
-                    })
-                    .catch(function(error) {writeToLogs(error.code, "fnUpdateUserState: "+error.message);});
+                if (user){
+                    //Update user state in Firebase database (online/ offline)
+                    let nodeRef = database.ref("users/" + user.uid);
+                    nodeRef.update({isOnline: true})
+                        .then(function () {
+                            //Create trigger onDisconnect
+                            /*let userPath = "users/" + user.uid;
+                            let myConnectionsRef = firebase.database().ref(userPath + "/connections");
+                            let lastOnlineRef = firebase.database().ref(userPath + "/lastOnline");
+                            let connectedRef = firebase.database().ref('.info/connected');
+                            connectedRef.on('value', function(snap) {
+                                if (snap.val() === true) {
+                                    let con = myConnectionsRef.push();
+                                    con.onDisconnect().remove();
+                                    con.set(true);
+                                    lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
+                                }
+                            });*/
+                            setDefaultChannel(); //Set default channelId for chat
+                            goToChat();//Redirect to chat page
+                        })
+                        .catch(function(error) {writeToLogs(error.code, "fnUpdateUserState: "+error.message);});
+                }
             })
             .catch(function (error) {writeToLogs(error.code, "fnSignIn: "+error.message);});
     }

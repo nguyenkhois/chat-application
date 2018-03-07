@@ -13,9 +13,15 @@ $(document).ready(function() {
                             removeLocalStoredData();//Remove channelId in sessionStorage
                             goToSignIn();
                         })
-                        .catch(function (error) {writeToLogs(error.code, error.message);});
+                        .catch(function (error) {
+                            writeToLogs(error.code, error.message);
+                        });
                 })
-                .catch(function (error) {writeToLogs(error.code, error.message);});
+                .catch(function (error) {
+                    writeToLogs(error.code, error.message);
+                });
         }
     });
+
+
 });

@@ -20,17 +20,15 @@ function getUserInfo(userId) {
 }
 function goToChat() {$(location).attr('href', 'index.html');}
 function goToSignIn() {$(location).attr('href', 'signin.html');}
-function removeLocalStoredData() {
-    if (typeof(Storage) !== "undefined"){
-        localStorage.removeItem("chatappChannelId");
-        localStorage.removeItem("chatappUserInfo");
-    }
+function setDefaultChannel() {
+    if (typeof(Storage) !== "undefined")
+        sessionStorage.chatappChannelId = 1;
     else
-        return false
+        return false;
 }
-function retrieveCurrentUserInfo() {
-    if (typeof(Storage) !== "undefined" && localStorage.chatappUserInfo)
-        return JSON.parse(localStorage.chatappUserInfo);
+function removeLocalStoredData() {
+    if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId)
+        sessionStorage.removeItem("chatappChannelId");
     else
         return false
 }

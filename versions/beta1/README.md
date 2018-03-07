@@ -4,10 +4,6 @@
 
 
 # Changelogs
-## Beta 2 (2018-03-08)
-* Added custom picture for the user
-* Upgraded user system (sign in, sign up, sign out) with localStorage for more effect, more control and speed up ChatApp
-
 ## Beta 1 (2018-03-07)
 * Added display name for messages
 

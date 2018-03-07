@@ -9,8 +9,7 @@ knapp.addEventListener("click", function(event) {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(loginuser){
-            console.log("Success, you logged in, welcome ", loginuser.uid);
-
+            window.location.href = "index.html"
         })
         .catch(function (error) {
             paragraf.innerHTML = "Error: " + error.message;

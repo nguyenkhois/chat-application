@@ -10,3 +10,4 @@ let config = {
 firebase.initializeApp(config);
 let database = firebase.database();
 let auth = firebase.auth();
+let defaultUserPhotoUrl = "images/icon-user.png";

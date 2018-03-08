@@ -17,6 +17,7 @@ header, main, footer{width: 100%;}
 .messageSucceed{color: #008000;}
 
 /* Sign in and sign up forms */
+#frmSignIn,#frmSignUp{margin-bottom: 20px;}
 .frm-signin, .frm-signup{width: 500px;text-align: center;}
 .frm-signin input, .frm-signup input{
     width: 350px;
@@ -38,9 +39,10 @@ header, main, footer{width: 100%;}
     border-radius: 5px;
 }
 .frm-signin input:focus, .frm-signup input:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
+.frm-signin a,.frm-signup a{color: #2d6aa5; text-decoration: underline;}
+.frm-signin a:hover, .frm-signup a:hover{color: #2d6aa5; text-decoration: none;}
 
-#frmSignIn,#frmSignUp{margin-bottom: 20px;}
-
+/*Buttons*/
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -66,14 +68,10 @@ header, main, footer{width: 100%;}
 }
 .button-signin:hover, .button-signup:hover, .button-send-message:hover {background-color: #ffffff;color: #8a8a8a;}
 
-.button-send-message:hover{}
-.frm-signin a,.frm-signup a{color: #2d6aa5; text-decoration: underline;}
-.frm-signin a:hover, .frm-signup a:hover{color: #2d6aa5; text-decoration: none;}
-
 /*Notify*/
 .notify-error{color: #ff0000;font-size: 12px;}
 
-/*Main chat page*/
+/*---------- CHAT PAGE -----------*/
 #chatApp{
     display: flex;
     flex-direction: row;
@@ -81,6 +79,8 @@ header, main, footer{width: 100%;}
     height: 100vh;
 }
 .chatApp-hidden{visibility: hidden;}
+.chatContents{width:100%;padding: 5px;overflow-y: scroll;}
+
 #dspPartMain{
     display: flex;
     flex-direction: column;
@@ -91,6 +91,7 @@ header, main, footer{width: 100%;}
     width: 300px;
     background-color: #2d6aa5;
     color: #cbcbcb;
+    overflow-y: scroll;
 }
 
 .sendMessage{
@@ -119,11 +120,17 @@ header, main, footer{width: 100%;}
     font-size: 18px;
 }
 
-.chatContents{padding: 5px;overflow-y: scroll;}
-
 .userinfo{padding: 10px;text-align: center;}
 .userinfo a{text-decoration: none; color: #cbcbcb;}
 .userinfo a:hover{text-decoration: underline;}
+.userinfo-photo{
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
 
 /*Channels*/
 .channels{padding: 10px;}
@@ -133,3 +140,32 @@ header, main, footer{width: 100%;}
 /*User list*/
 .userlist{padding: 10px;}
 .userlist-online{color: #87cefa;}
+
+/*Message*/
+.message{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 5px;
+}
+.message-userinfo{
+    margin: 5px;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+}
+.message-userinfo img{
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+.message-content{
+    margin: 5px;
+}
+.message-timestamp{
+    margin: 5px;
+    width: 100px;
+}

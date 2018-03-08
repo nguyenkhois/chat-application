@@ -18,8 +18,8 @@ $(document).ready(function () {
             let currentUserDisplayName = $("<p>").html("<b>"+objCurrentUserInfo.displayName+"</b>");
             let photoUrl = objCurrentUserInfo.photoUrl;
             if (photoUrl === '')
-                photoUrl = "images/icon-user.png"; //default image
-            let currentUserPhoto = $("<img>").attr("src",photoUrl);
+                photoUrl = defaultUserPhotoUrl; //default image
+            let currentUserPhoto = $("<img>").attr("src",photoUrl).addClass("userinfo-photo");
             dspCurrentUser.append(currentUserPhoto, currentUserDisplayName);
 
             //Show ChatApp content
@@ -122,7 +122,6 @@ $(document).ready(function () {
 
             nodeRef.set({
                 userId: objCurrentUserInfo.userId,
-                displayName: objCurrentUserInfo.displayName,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()
@@ -149,13 +148,24 @@ $(document).ready(function () {
         scrollToBottom();
     }
     function buildAMessage(objData) {
-        let displayName = $("<b>").text(objData.displayName);
-        let message = $("<p>").html(": " + objData.content + " ");
-        let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
-        message.prepend(displayName);
-        message.append(timeStamp);
+        //Get sender information
+        let nodeRef = database.ref("users/" + objData.userId)
+        nodeRef.once("value",function (snapshot) {
+            //build a message
+            senderPhotoUrl = snapshot.val().photoUrl;
+            if (senderPhotoUrl === '')
+                senderPhotoUrl = defaultUserPhotoUrl; //Get default user photo in config.js
 
-        chatContents.append(message);
+            let message = `<div class="message">
+                            <div class="message-userinfo">
+                                <img src="${senderPhotoUrl}" alt=""><br>
+                                ${snapshot.val().displayName}                              
+                            </div>
+                            <div class="message-content">${objData.content}</div>
+                            <div class="message-timestamp">${objData.timeStamp}</div>
+                        </div>`;
+            chatContents.append(message);
+        });
     }
 
     function scrollToBottom() {

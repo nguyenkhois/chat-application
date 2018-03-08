@@ -14,7 +14,7 @@ firebase.auth().signOut().then(function() {
 
 }, function(error) {
     console.log(error);
-    $("#").text("Signout successful");
+    $("#dspUserInfo").text("Signout successful");
     goToSignIn();
 
 });

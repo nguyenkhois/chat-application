@@ -16,9 +16,6 @@ $(document).ready(function () {
             dspCurrentUser.append(currentUserDisplayName);
             dspCurrentUser.prepend("<p><img src='images/icon-user.png'></p>");
 
-            //Show ChatApp content
-            chatApp.removeClass("chatApp-hidden");
-
             //Get components
             getChannels();
             getUserList();

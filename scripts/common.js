@@ -19,7 +19,7 @@ function getUserInfo(userId) {
         .catch(function (error) {writeToLogs(error.code,"fnGetUserInfo: "+error.message);});
 }
 function goToChat() {$(location).attr('href', 'index.html');}
-function goToSignIn() {$(location).attr('href', 'signin.html');}
+function goToSignIn() {$(location).attr('href', 'login.html');}
 function setDefaultChannel() {
     if (typeof(Storage) !== "undefined")
         sessionStorage.chatappChannelId = 1;

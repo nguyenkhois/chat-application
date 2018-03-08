@@ -8,7 +8,7 @@ $(document).ready(function () {
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
 
-    auth.onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
             //Get current user display name

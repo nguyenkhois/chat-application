@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" manifest="manifest.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatApp - Sign in</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="external-resources/web-addons.css">
+    <script src="external-resources/jquery-3.3.1.min.js"></script>
+    <script src="external-resources/web-addons.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+</head>
+<body>
+
+<div id="container">
+
+    <!--Sign in-->
+    <div id="signIn" class="box box-shadow frm-signin">
+        <h1>Sign in to ChatApp</h1>
+        <form action="#" id="frmSignIn">
+            <p>Enter your chat's account</p>
+            <input type="email" id="txtEmail" placeholder="your-email@example.com" minlength="5" maxlength="50" required><br>
+            <span id="txtEmailNotify" class="notify-error"></span><br>
+            <input type="password" id="txtPassword" placeholder="your password" minlength="6" maxlength="50"  required><br>
+            <span id="txtPasswordNotify" class="notify-error"></span><br>
+            <button id="btnSignIn" type="button" class="button button-signin">Sign in</button>
+        </form>
+
+        <a href="signup.html">Don't have an account? Sign up here</a>
+    </div>
+
+    <div id="dspUserInfo"></div>
+    <div id="systemMessages"></div>
+
+</div>
+    <!-- Script -->
+    <script src="scripts/config.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="scripts/signin.js"></script>
+</body>
+</html>

@@ -19,5 +19,4 @@ firebase.auth().signOut().then(function() {
 
 });
 }
-//signOut();
 

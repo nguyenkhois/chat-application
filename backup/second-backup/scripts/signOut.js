@@ -32,8 +32,13 @@ function signOut (user) {
                 $("#dspUserInfo").text("Signout successful");
                 window.location('login.html');
 
+<<<<<<< HEAD
             });
         })
 }*/
 //signOut();
+=======
+});
+}
+>>>>>>> ff761ab387a4d2a80601ae6b6c11ce170a643b9f
 

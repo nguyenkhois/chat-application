@@ -9,7 +9,10 @@ $(document).ready(function () {
     let chatApp = $("#chatApp");
 
     firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user)
         if (user) {
+            console.log(user.uid);
+
             //User is signed in.
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(user.displayName);
@@ -40,7 +43,6 @@ $(document).ready(function () {
         } else {
             // No user is signed in.
             $("#lnkSignOut").hide();
-            goToSignIn();
         }
     });
 

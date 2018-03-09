@@ -84,7 +84,7 @@ $(document).ready(function () {
                         phoneNumber: snapshot.val().phoneNumber,
                         photoUrl: snapshot.val().photoUrl};
 
-                    //Store to localStorage
+                    //Store current user to localStorage
                     if (typeof(Storage) !== "undefined")
                         localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
 

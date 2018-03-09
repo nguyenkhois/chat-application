@@ -14,6 +14,23 @@ $(document).ready(function() {
 
     auth.onAuthStateChanged(function(user){
         if (user) {
+            let nodeRef = database.ref("users/" + user.uid);
+            nodeRef.once("value")
+                .then(function(snapshot) {
+
+                    let objUserInfo = {
+                    userId: user.uid,
+                    displayName: snapshot.val().displayName,
+                    phoneNumber: snapshot.val().phoneNumber,
+                    photoUrl: snapshot.val().photoUrl
+                    };
+
+
+                    if (typeof(Storage) !== "undefined")
+                        localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
+
+                })
+                .catch();
             console.log("authstatechanged TRUE");
         }
         else {
@@ -26,7 +43,6 @@ $(document).ready(function() {
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function(user){
                         if (user) {
-
                             let nodeRef = database.ref("users/" + user.uid);
                             nodeRef.update({isOnline: true})
                                 .then(function () {

@@ -88,8 +88,9 @@ $(document).ready(function () {
                     if (typeof(Storage) !== "undefined")
                         localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
 
-                    console.log(objUserInfo);
-                    console.log(localStorage.chatappCurrentUserInfo);
+                    //console.log(objUserInfo);
+                    //console.log(localStorage.chatappCurrentUserInfo);
+                    $(location).attr('href', '../views/index.html');
                 });
         }
         else {
@@ -98,8 +99,6 @@ $(document).ready(function () {
                 //event.preventDefault();
                 //do stuff
                 if (userTest()) {
-                    console.log('bra');
-                    console.log(displayName.val());
                     signUpUser(email.val(), password.val(), displayName.val());
                 }
             });

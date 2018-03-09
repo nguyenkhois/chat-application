@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function () {
     let dspChannels = $("#dspChannels");
     let dspCurrentChannel = $("#dspCurrentChannel");
@@ -9,11 +8,8 @@ $(document).ready(function () {
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user)
+    auth.onAuthStateChanged(function(user) {
         if (user) {
-            console.log(user.uid);
-
             //User is signed in.
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(user.displayName);
@@ -44,6 +40,7 @@ $(document).ready(function () {
         } else {
             // No user is signed in.
             $("#lnkSignOut").hide();
+            goToSignIn();
         }
     });
 
@@ -149,7 +146,3 @@ $(document).ready(function () {
         chatContents.append(message);
     }
 });
-=======
-//Created for Filip
-//included in index.html
->>>>>>> 428073b8adc83dad4e6915642922c966d6f78519

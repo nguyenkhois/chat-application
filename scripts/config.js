@@ -1,3 +1,6 @@
+//Common configs
+//Using Simon's Firebase database
+
 let config = {
     apiKey: "AIzaSyBbRmOv-XuKngTAir2avZf7jk1D7jxg9LU",
     authDomain: "gruppprojekt.firebaseapp.com",
@@ -8,5 +11,9 @@ let config = {
 };
 firebase.initializeApp(config);
 let database = firebase.database();
+<<<<<<< HEAD
 let auth = firebase.auth();
 let defaultUserPhotoUrl = "images/icon-user.png";
+=======
+let auth = firebase.auth();
+>>>>>>> 428073b8adc83dad4e6915642922c966d6f78519

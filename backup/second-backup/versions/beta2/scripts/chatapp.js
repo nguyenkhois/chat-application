@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function () {
     let dspChannels = $("#dspChannels");
     let dspCurrentChannel = $("#dspCurrentChannel");
@@ -9,16 +8,22 @@ $(document).ready(function () {
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user)
+    auth.onAuthStateChanged(function(user) {
         if (user) {
-            console.log(user.uid);
-
             //User is signed in.
-            //Get current user display name
-            let currentUserDisplayName = $("<b>").text(user.displayName);
-            dspCurrentUser.append(currentUserDisplayName);
-            dspCurrentUser.prepend("<p><img src='images/icon-user.png'></p>");
+            //Get user information form localStorage
+            let objCurrentUserInfo = retrieveCurrentUserInfo();
+
+            //Get current user display name and photo
+            let currentUserDisplayName = $("<p>").html("<b>"+objCurrentUserInfo.displayName+"</b>");
+            let photoUrl = objCurrentUserInfo.photoUrl;
+            if (photoUrl === '')
+                photoUrl = defaultUserPhotoUrl; //default image
+            let currentUserPhoto = $("<img>").attr("src",photoUrl).addClass("userinfo-photo");
+            dspCurrentUser.append(currentUserPhoto, currentUserDisplayName);
+
+            //Show ChatApp content
+            chatApp.removeClass("chatApp-hidden");
 
             //Get components
             getChannels();
@@ -33,17 +38,18 @@ $(document).ready(function () {
             });
 
             //Assign onclick function to button Send end Enter key
-            btnSend.click(function(){sendAMessage(user);});
+            btnSend.click(function(){sendAMessage(user,objCurrentUserInfo);});
 
             //Handle enter key
             $(document).keydown(function(event) {
                 let keycode = (event.keyCode ? event.keyCode : event.which);
                 if (keycode === '13')
-                    sendAMessage(user);
+                    sendAMessage(user,objCurrentUserInfo);
             });
         } else {
             // No user is signed in.
             $("#lnkSignOut").hide();
+            goToSignIn();
         }
     });
 
@@ -67,14 +73,14 @@ $(document).ready(function () {
     }
     function storeChannel(channelId,channelName) {
         if (typeof(Storage) !== "undefined") {
-            sessionStorage.chatappChannelId = channelId;
+            localStorage.chatappChannelId = channelId;
             dspCurrentChannel.text("# "+channelName);
             getMessages(channelId);//reload all messages which are in the chosen channel
         }
     }
     function retrieveChannel() {
-        if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId){
-            return sessionStorage.chatappChannelId;
+        if (typeof(Storage) !== "undefined" && localStorage.chatappChannelId){
+            return localStorage.chatappChannelId;
         }else
             return false
     }
@@ -107,7 +113,7 @@ $(document).ready(function () {
     }
 
     //Messages
-    function sendAMessage(user) {
+    function sendAMessage(user,objCurrentUserInfo) {
         if (user){
             let channelId = retrieveChannel();
             let newKey = database.ref("messages/").push().key;
@@ -115,8 +121,7 @@ $(document).ready(function () {
             let message = txtMessage.val();
 
             nodeRef.set({
-                userId: user.uid,
-                displayName: user.displayName,
+                userId: objCurrentUserInfo.userId,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()
@@ -125,6 +130,8 @@ $(document).ready(function () {
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
         }
         else{return false}
+        txtMessage.focus();
+        scrollToBottom();
     }
     function getMessages(channelId) {
         if (parseInt(channelId)){
@@ -135,21 +142,33 @@ $(document).ready(function () {
                     buildAMessage(childSnapshot.val());
                 });
             });
-            txtMessage.focus();
         }
         else{return false}
+        txtMessage.focus();
+        scrollToBottom();
     }
     function buildAMessage(objData) {
-        let displayName = $("<b>").text(objData.displayName);
-        let message = $("<p>").html(": " + objData.content + " ");
-        let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
-        message.prepend(displayName);
-        message.append(timeStamp);
+        //Get sender information
+        let nodeRef = database.ref("users/" + objData.userId)
+        nodeRef.once("value",function (snapshot) {
+            //build a message
+            senderPhotoUrl = snapshot.val().photoUrl;
+            if (senderPhotoUrl === '')
+                senderPhotoUrl = defaultUserPhotoUrl; //Get default user photo in config.js
 
-        chatContents.append(message);
+            let message = `<div class="message">
+                            <div class="message-userinfo">
+                                <img src="${senderPhotoUrl}" alt=""><br>
+                                ${snapshot.val().displayName}                              
+                            </div>
+                            <div class="message-content">${objData.content}</div>
+                            <div class="message-timestamp">${objData.timeStamp}</div>
+                        </div>`;
+            chatContents.append(message);
+        });
+    }
+
+    function scrollToBottom() {
+        chatContents.scrollTop(chatContents.prop("scrollHeight"));
     }
 });
-=======
-//Created for Filip
-//included in index.html
->>>>>>> 428073b8adc83dad4e6915642922c966d6f78519

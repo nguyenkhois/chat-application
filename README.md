@@ -3,7 +3,7 @@
 
 ## Changelog
 ### Version 1.0 (2018-03-10)
-* Created simple chat app with basic functions:
+* Created the simple chat app with basic functions:
    * Sign in
    * Sign up
    * Sign out

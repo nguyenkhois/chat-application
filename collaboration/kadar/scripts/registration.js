@@ -7,49 +7,104 @@ $(document).ready(function () {
     let email = $('#txtEmail');
     let password = $('#txtPassword');
     let displayName = $('#txtDisplayName');
+    let phoneNumber = $('#txtPhoneNumber');
+    let photoUrl = $('#txtPhotoUrl');
     let namePattern = /^[a-zA-Z-]+$/;
     let mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     //Functions
     function userTest() {
-
-        if (!namePattern.test($('#txtDisplayName').val()) || $('#txtDisplayName').val() === '') {
+        if (!namePattern.test(displayName.val()) || displayName.val() === '') {
             displayName.attr('placeholder', 'Enter a display name');
             displayName.addClass('errorClass');
-            $('#txtDisplayName').val('');
+            displayName.val('');
             displayName.focus();
         }
 
-        else if (!mailPattern.test($('#txtEmail').val()) || $('#txtEmail').val() === '') {
+        else if (!mailPattern.test(email.val()) || email.val() === '') {
             email.attr('placeholder', "Enter a valid email address");
             email.addClass('errorClass');
+            email.val('');
+            email.focus();
         }
-        else if ($('#txtPassword').val() === '' || $('#txtPassword').val().length < 6) {
+        else if (password.val() === '' || password.val().length < 6) {
             password.attr('placeholder', "Password must be at least 6 character");
             password.addClass('errorClass');
+            password.focus();
         }
         else {
+            console.log(displayName.val());
             return true;
         }
+    }
+    function signUpUser (email, password, displayName) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(function(user){
+                console.log("Successfully created user account with uid:", user.uid);
+               let userId = user.uid;
 
+               createUser(userId, displayName, phoneNumber.val(), photoUrl.val());
+            })
+            .catch(function(error){
+                console.log("Error creating user:", error);
+            });
+    }
+    function createUser (userId, displayName, phoneNumber, photoUrl) {
+        firebase.database().ref('users/' + userId).set({
+            userId: userId,
+            displayName: displayName,
+            phoneNumber: phoneNumber,
+            photoUrl: photoUrl})
+            .then(function() {
+                console.log("Successfully created user account with username:", displayName);
+                // Update successful.
+
+            })
+            .catch(function(error) {
+                // An error happened.
+            });
     }
 
 
+
     //MAIN
-    $('#btnCreateAccount').click(function (event) {
-        //event.preventDefault();
 
-        //do stuff
-        if (userTest()) {
-            console.log('bra');
+
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            // User is signed in.
+            let objUserInfo = {};
+            let nodeRef = database.ref("users/" + user.uid);
+            nodeRef.once("value")
+                .then(function (snapshot) {
+                    //Create object objUserInfo
+                    objUserInfo = {
+                        userId: user.uid,
+                        displayName: snapshot.val().displayName,
+                        phoneNumber: snapshot.val().phoneNumber,
+                        photoUrl: snapshot.val().photoUrl};
+
+                    //Store current user to localStorage
+                    if (typeof(Storage) !== "undefined")
+                        localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
+
+                    //console.log(objUserInfo);
+                    //console.log(localStorage.chatappCurrentUserInfo);
+                    $(location).attr('href', '../views/index.html');
+                });
         }
-        
-        
-        
-        
+        else {
+            // No user is signed in.
+            $('#btnCreateAccount').click(function (event) {
+                //event.preventDefault();
+                //do stuff
+                if (userTest()) {
+                    signUpUser(email.val(), password.val(), displayName.val());
+                }
+            });
+
+        }
     });
-
-
 });
 
 

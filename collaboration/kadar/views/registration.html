@@ -36,12 +36,11 @@
 					<input type="text" id="txtEmail" placeholder="Email">
 					<input type="password" id="txtPassword" placeholder="Set a password">-->
 
-					<input type="text" id="txtDisplayName" placeholder="Display name">
-					<span></span>
-					<input type="text" id="txtEmail" placeholder="Email">
-					<span id="mailError"></span>
-					<input type="password" id="txtPassword" placeholder="Set a password">
-
+					<input type="text" id="txtDisplayName" placeholder="Display name" required>
+					<input type="text" id="txtEmail" placeholder="Email" required minlength="6" maxlength="50">
+					<input type="password" id="txtPassword" placeholder="Set a password" required minlength="6" maxlength="50">
+					<input type="text" id="txtPhoneNumber" placeholder="Phone number">
+					<input type="text" id="txtPhotoUrl" placeholder="Url to a photo">
 					<button id="btnCreateAccount" type="button">Create account</button>
 				</form>
 			</div>

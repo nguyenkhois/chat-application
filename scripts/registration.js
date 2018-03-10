@@ -1,8 +1,6 @@
 //Created for Kadar
 //included in registration.html
-
 $(document).ready(function () {
-
     //Get HTML elements
     let email = $('#txtEmail');
     let password = $('#txtPassword');
@@ -56,20 +54,16 @@ $(document).ready(function () {
             phoneNumber: phoneNumber,
             photoUrl: photoUrl})
             .then(function() {
-                console.log("Successfully created user account with username:", displayName);
                 // Update successful.
-
+                console.log("Successfully created user account with username:", displayName);
+                $(location).attr("href",chatPage); //K added
             })
-            .catch(function(error) {
-                // An error happened.
-            });
+            .catch(function(error) {});
     }
 
 
 
     //MAIN
-
-
     auth.onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
@@ -90,7 +84,7 @@ $(document).ready(function () {
 
                     //console.log(objUserInfo);
                     //console.log(localStorage.chatappCurrentUserInfo);
-                    $(location).attr('href', '../views/chat.html');
+                    $(location).attr('href', chatPage); //K modified
                 });
         }
         else {
@@ -102,7 +96,6 @@ $(document).ready(function () {
                     signUpUser(email.val(), password.val(), displayName.val());
                 }
             });
-
         }
     });
 });

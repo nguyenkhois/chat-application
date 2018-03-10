@@ -124,6 +124,14 @@ a:link, a:visited {
 .form-container button:hover {
     cursor: pointer;
 }
+.userinfo-photo{
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
 /*End of updating profile*/
 
 @media(max-width: 768px) {

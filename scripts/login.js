@@ -11,30 +11,24 @@ $(document).ready(function() {
 
 
     //MAIN
-
     auth.onAuthStateChanged(function(user){
         if (user) {
             let nodeRef = database.ref("users/" + user.uid);
             nodeRef.once("value")
                 .then(function(snapshot) {
-
                     let objUserInfo = {
                     userId: user.uid,
                     displayName: snapshot.val().displayName,
                     phoneNumber: snapshot.val().phoneNumber,
                     photoUrl: snapshot.val().photoUrl
                     };
-
-
                     if (typeof(Storage) !== "undefined")
                         localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
-
                 })
                 .catch();
             console.log("authstatechanged TRUE");
         }
         else {
-
             knapp.addEventListener("click", function(event) {
                 event.preventDefault();
                 let email = document.getElementById("email").value;
@@ -46,18 +40,16 @@ $(document).ready(function() {
                             let nodeRef = database.ref("users/" + user.uid);
                             nodeRef.update({isOnline: true})
                                 .then(function () {
-
-                                    window.location.href = "chat.html";
+                                    //window.location.href = chatPage;
+                                    $(location).attr("href",chatPage); //K added
                                 })
                         }
                     })
                     .catch(function (error) {
                         console.log("signin catch (false)")
                     });
-
             });
             console.log("authstatechanged FALSE");
         }
-
     });
 });

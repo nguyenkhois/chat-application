@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function () {
     let dspChannels = $("#dspChannels");
     let dspCurrentChannel = $("#dspCurrentChannel");
@@ -9,16 +8,16 @@ $(document).ready(function () {
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
 
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user)
+    auth.onAuthStateChanged(function(user) {
         if (user) {
-            console.log(user.uid);
-
             //User is signed in.
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(user.displayName);
             dspCurrentUser.append(currentUserDisplayName);
-            dspCurrentUser.prepend("<p><img src='images/icon-user.png'></p>");
+            dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
+
+            //Show ChatApp content
+            chatApp.removeClass("chatApp-hidden");
 
             //Get components
             getChannels();
@@ -44,6 +43,7 @@ $(document).ready(function () {
         } else {
             // No user is signed in.
             $("#lnkSignOut").hide();
+            goToSignIn();
         }
     });
 
@@ -81,10 +81,10 @@ $(document).ready(function () {
     function getDefaultChannel() {
         let nodeRef = database.ref("channels/").orderByChild("defaultChannel").equalTo(true);
         return nodeRef.once("value")
-                    .then(function (snapshot) {
-                        return snapshot.val();
-                    })
-                    .catch(function () {});
+            .then(function (snapshot) {
+                return snapshot.val();
+            })
+            .catch(function () {});
     }
 
     //Users
@@ -120,7 +120,7 @@ $(document).ready(function () {
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()
-                })
+            })
                 .then(function () {txtMessage.val("");})
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
         }
@@ -141,15 +141,12 @@ $(document).ready(function () {
     }
     function buildAMessage(objData) {
         let displayName = $("<b>").text(objData.displayName);
-        let message = $("<p>").html(": " + objData.content + " ");
         let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
+        let message = $("<p>").html(": " + objData.content + " ");
+
         message.prepend(displayName);
         message.append(timeStamp);
 
         chatContents.append(message);
     }
 });
-=======
-//Created for Filip
-//included in index.html
->>>>>>> 428073b8adc83dad4e6915642922c966d6f78519

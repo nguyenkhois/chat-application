@@ -1,16 +1,16 @@
 //Created for Simon
 //included in login.html
-
 $(document).ready(function() {
     //Get HTML elements
-    let user = auth.currentUser;
+    //let user = auth.currentUser; //Declared but not used - K
     let knapp = document.getElementById("login");
-    let paragraf = document.getElementById("paragraf");
+    //let paragraf = document.getElementById("paragraf"); //Declared but not used -K
 
     //Functions
-
+    //Need input validation (HTML validation and JS validation)
 
     //MAIN
+    //Need handle errors which you receive from Firebase server and show them to the user
     auth.onAuthStateChanged(function(user){
         if (user) {
             let nodeRef = database.ref("users/" + user.uid);
@@ -20,12 +20,12 @@ $(document).ready(function() {
                     userId: user.uid,
                     displayName: snapshot.val().displayName,
                     phoneNumber: snapshot.val().phoneNumber,
-                    photoUrl: snapshot.val().photoUrl
-                    };
+                    photoUrl: snapshot.val().photoUrl};
+
                     if (typeof(Storage) !== "undefined")
                         localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
                 })
-                .catch();
+                .catch(function (error) {});
             console.log("authstatechanged TRUE");
         }
         else {

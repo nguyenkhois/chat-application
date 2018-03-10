@@ -7,8 +7,11 @@ $(document).ready(function () {
     let displayName = $('#txtDisplayName');
     let phoneNumber = $('#txtPhoneNumber');
     let photoUrl = $('#txtPhotoUrl');
-    let namePattern = /^[a-zA-Z-]+$/;
-    let mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let btnCreateAccount = $('#btnCreateAccount');
+
+    //Founded in config.js which are global variables
+    //let namePattern = /^[a-zA-Z-\s]+$/;
+    //let mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
     //Functions
     function userTest() {
@@ -17,21 +20,24 @@ $(document).ready(function () {
             displayName.addClass('errorClass');
             displayName.val('');
             displayName.focus();
+            return false //K added
         }
-
         else if (!mailPattern.test(email.val()) || email.val() === '') {
             email.attr('placeholder', "Enter a valid email address");
             email.addClass('errorClass');
             email.val('');
             email.focus();
+            return false
         }
         else if (password.val() === '' || password.val().length < 6) {
             password.attr('placeholder', "Password must be at least 6 character");
             password.addClass('errorClass');
+            password.val(''); //K added
             password.focus();
+            return false
         }
         else {
-            console.log(displayName.val());
+            //console.log(displayName.val()); //K
             return true;
         }
     }
@@ -39,9 +45,7 @@ $(document).ready(function () {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(function(user){
                 console.log("Successfully created user account with uid:", user.uid);
-               let userId = user.uid;
-
-               createUser(userId, displayName, phoneNumber.val(), photoUrl.val());
+                createUser(user.uid, displayName, phoneNumber.val(), photoUrl.val());
             })
             .catch(function(error){
                 console.log("Error creating user:", error);
@@ -58,21 +62,21 @@ $(document).ready(function () {
                 console.log("Successfully created user account with username:", displayName);
                 $(location).attr("href",chatPage); //K added
             })
-            .catch(function(error) {});
+            .catch(function(error) {
+                console.log("Error creating user:", error); //K added
+            });
     }
-
-
 
     //MAIN
     auth.onAuthStateChanged(function(user) {
         if (user) {
             // User is signed in.
-            let objUserInfo = {};
+            //let objUserInfo = {}; // Don't need - K added
             let nodeRef = database.ref("users/" + user.uid);
             nodeRef.once("value")
                 .then(function (snapshot) {
                     //Create object objUserInfo
-                    objUserInfo = {
+                    let objUserInfo = {
                         userId: user.uid,
                         displayName: snapshot.val().displayName,
                         phoneNumber: snapshot.val().phoneNumber,
@@ -89,9 +93,8 @@ $(document).ready(function () {
         }
         else {
             // No user is signed in.
-            $('#btnCreateAccount').click(function (event) {
+            btnCreateAccount.click(function () {
                 //event.preventDefault();
-                //do stuff
                 if (userTest()) {
                     signUpUser(email.val(), password.val(), displayName.val());
                 }

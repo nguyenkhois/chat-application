@@ -27,11 +27,11 @@
 			</div>
 			<div class="form-container">
 				<form>
-					<input type="text" id="txtDisplayName" placeholder="Display name" required>
-					<input type="text" id="txtEmail" placeholder="Email" required minlength="6" maxlength="50">
-					<input type="password" id="txtPassword" placeholder="Set a password" required minlength="6" maxlength="50">
-					<input type="text" id="txtPhoneNumber" placeholder="Phone number">
-					<input type="text" id="txtPhotoUrl" placeholder="Url to a photo">
+					<input type="text" id="txtDisplayName" minlength="3" maxlength="50" placeholder="Display name" required>
+					<input type="text" id="txtEmail" placeholder="Email" minlength="6" maxlength="50" required>
+					<input type="password" id="txtPassword" minlength="6" maxlength="50" placeholder="Set a password" required>
+					<input type="text" id="txtPhoneNumber" maxlength="20" placeholder="Phone number">
+					<input type="text" id="txtPhotoUrl" maxlength="200" placeholder="Url to a photo">
 					<button id="btnCreateAccount" type="button">Create account</button>
 				</form>
 			</div>

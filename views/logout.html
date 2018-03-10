@@ -27,17 +27,15 @@
 
                 firebase.auth().signOut().then(function() {
                     console.log("signout successful");
-
+                    goToSignIn(); //K added
                 }).catch(function(error) {
                     console.log("signout failed")
                 });
-
-
             }
             else {
                 console.log("authstatechanged FALSE");
+                goToSignIn(); //K added
             }
-
         });
 
 

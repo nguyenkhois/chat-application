@@ -13,7 +13,7 @@ let database = firebase.database();
 let auth = firebase.auth();
 
 //Default variables
-let namePattern = /^[a-zA-Z-]+$/;
+let namePattern = /^[a-zA-Z-\s]+$/;
 let mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 let defaultUserPhotoUrl = "../images/icon-user.png";
 let chatPage = "index.html";

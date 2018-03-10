@@ -11,4 +11,4 @@
    * Chat main page
       * Display the current user information (display name and picture)
       * Chat in a chosen channel      
-      * A list user (who is online/ offline)
+      * A user list (who is online/ offline)

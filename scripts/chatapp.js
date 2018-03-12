@@ -7,12 +7,12 @@ $(document).ready(function () {
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
-    let testing = JSON.parse(localStorage.getItem('chatappCurrentUserInfo'));
+    let userInfo = JSON.parse(localStorage.getItem('chatappCurrentUserInfo'));
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
             //Get current user display name
-            let currentUserDisplayName = $("<b>").text(testing.displayName);
+            let currentUserDisplayName = $("<b>").text(userInfo.displayName);
 
             dspCurrentUser.append(currentUserDisplayName);
             dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
@@ -117,7 +117,7 @@ $(document).ready(function () {
 
             nodeRef.set({
                 userId: user.uid,
-                displayName: testing.displayName,
+                displayName: userInfo.displayName,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()

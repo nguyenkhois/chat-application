@@ -1,8 +1,4 @@
 $(document).ready(function() {
-    //Get HTML elements
-    let knapp = document.getElementById("login");
-    let mailformat = /^([A-Za-z0-9_.\-]){1,200}@([A-Za-z0-9_.\-]){1,200}\.([A-Za-z]){2,6}$/;
-
 
     //MAIN
     auth.onAuthStateChanged(function(user){
@@ -23,10 +19,10 @@ $(document).ready(function() {
             console.log("authstatechanged TRUE");
         }
         else {
-            knapp.addEventListener("click", function(event) {
+            $("#login").on("click", function(event) {
                 event.preventDefault();
-                let email = document.getElementById("email").value;
-                let password = document.getElementById("pass").value;
+                let email = $("#email").val();
+                let password = $("#pass").val();
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function(user){
@@ -42,7 +38,7 @@ $(document).ready(function() {
                     .catch(function (error) {
                         console.log("signin catch (false)");
 
-                        if (mailformat.test($("#email").val()) == false) {
+                        if (mailPattern.test($("#email").val()) == false) {
                             alert("Email format is wrong");
                             return false;
                         }

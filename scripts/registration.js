@@ -56,7 +56,9 @@ $(document).ready(function () {
             userId: userId,
             displayName: displayName,
             phoneNumber: phoneNumber,
-            photoUrl: photoUrl})
+            photoUrl: photoUrl,
+            isOnline: true
+        })
             .then(function() {
                 // Update successful.
                 console.log("Successfully created user account with username:", displayName);

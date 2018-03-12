@@ -1,17 +1,10 @@
-//Created for Simon
-//included in login.html
-
 $(document).ready(function() {
     //Get HTML elements
-    //let user = auth.currentUser; //Declared but not used - K
     let knapp = document.getElementById("login");
-    //let paragraf = document.getElementById("paragraf"); //Declared but not used -K
+    let mailformat = /^([A-Za-z0-9_.\-]){1,200}@([A-Za-z0-9_.\-]){1,200}\.([A-Za-z]){2,6}$/;
 
-    //Functions
-    //Need input validation (HTML validation and JS validation)
 
     //MAIN
-    //Need handle errors which you receive from Firebase server and show them to the user
     auth.onAuthStateChanged(function(user){
         if (user) {
             let nodeRef = database.ref("users/" + user.uid);
@@ -47,7 +40,17 @@ $(document).ready(function() {
                         }
                     })
                     .catch(function (error) {
-                        console.log("signin catch (false)")
+                        console.log("signin catch (false)");
+
+                        if (mailformat.test($("#email").val()) == false) {
+                            alert("Email format is wrong");
+                            return false;
+                        }
+                        else {
+                            alert("Email or Password is wrong");
+                            return false;
+                        }
+
                     });
             });
             console.log("authstatechanged FALSE");

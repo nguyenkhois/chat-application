@@ -165,7 +165,8 @@ header, main, footer{width: 100%;}
 
 /*User list*/
 .userlist{padding: 10px;}
-.userlist-online{color: #87cefa;}
+.userlist-online span {color: #00ce00;}
+.userlist-offline span {color: red;}
 ::-webkit-scrollbar {
     display: none;
 }

@@ -100,10 +100,17 @@ $(document).ready(function () {
     }
     function buildAnUser(objData) {
         let displayName = $("<p>").text(objData.displayName);
+        let statusDot = $('<span>').text('●\t');
 
-        if (objData.isOnline)
+        if (objData.isOnline) {
             displayName.addClass("userlist-online");
+        }
 
+        else {
+            displayName.addClass("userlist-offline");
+        }
+
+        displayName.prepend(statusDot);
         dspUserList.append(displayName);
     }
 

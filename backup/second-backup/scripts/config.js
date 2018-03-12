@@ -1,9 +1,0 @@
-let config = {
-    apiKey: "AIzaSyBbRmOv-XuKngTAir2avZf7jk1D7jxg9LU",
-    authDomain: "gruppprojekt.firebaseapp.com",
-    databaseURL: "https://gruppprojekt.firebaseio.com",
-    projectId: "gruppprojekt",
-    storageBucket: "gruppprojekt.appspot.com",
-    messagingSenderId: "623943997734"
-};
-firebase.initializeApp(config);

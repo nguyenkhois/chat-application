@@ -6,6 +6,7 @@ $(document).ready(function () {
     let txtRetypePassword = $("#txtRetypePassword");
     let txtPhoneNumber = $("#txtPhoneNumber");
     let txtPhotoUrl = $("#txtPhotoUrl");
+    let btnUpdateProfile = $("#btnUpdateProfile");
 
     //FUNCTIONS
     function retrieveCurrentUserInfo() {
@@ -23,7 +24,8 @@ $(document).ready(function () {
                             phoneNumber: newPhoneNumber,
                             photoUrl: newPhotoUrl})
                 .then(function () {
-                    //Updated user profile successfully
+                    //Updated user profile into Firebase database successfully
+                    //Store object objUserInfo to localStorage
                     let objUserInfo = {
                         userId: user.uid,
                         displayName: newDisplayName,
@@ -80,7 +82,7 @@ $(document).ready(function () {
                 txtPhoneNumber.val(objCurrentUserInfo.phoneNumber);
                 txtPhotoUrl.val(objCurrentUserInfo.photoUrl);
             }
-            $("#btnUpdateProfile").click(function () {
+            btnUpdateProfile.click(function () {
                 if (validateUpdateProfile())
                     updateProfile(user.uid, txtDisplayName.val(), txtNewPassword.val(), txtPhoneNumber.val(), txtPhotoUrl.val());
             });

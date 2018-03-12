@@ -130,6 +130,11 @@ a:link, a:visited {
     -webkit-border-radius: 50px;
     border-radius: 50px;
 }
+.errorClass::placeholder {
+    color: red;
+    font-weight: bold;
+
+}
 /*End of updating profile*/
 
 @media(max-width: 768px) {

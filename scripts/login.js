@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     //MAIN
     auth.onAuthStateChanged(function(user){
         if (user) {
@@ -21,8 +20,9 @@ $(document).ready(function() {
         else {
             $("#login").on("click", function(event) {
                 event.preventDefault();
-                let email = $("#email").val();
-                let password = $("#pass").val();
+                email = $('#email').val();
+                password = $('#pass').val();
+                
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function(user){
@@ -36,10 +36,13 @@ $(document).ready(function() {
                         }
                     })
                     .catch(function (error) {
-                        console.log("signin catch (false)");
+                        //console.log("signin catch (false)");
 
-                        if (mailPattern.test($("#email").val()) == false) {
-                            alert("Email format is wrong");
+                        if (mailPattern.test($("#email").val()) === false) {
+                            //alert("Email format is wrong");
+                            $('#email').attr('placeholder', 'Enter your email');
+                            $('#email').addClass('errorClass');
+                            $('#email').val('');
                             return false;
                         }
                         else {

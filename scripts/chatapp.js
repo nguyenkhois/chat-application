@@ -177,9 +177,6 @@ $(document).ready(function () {
         messageBox.append(message);
 
         chatContents.append(messageBox);
-
-        chatContents.append(message);
-
         scrollChatContents();
     }
 

@@ -13,9 +13,27 @@ $(document).ready(function () {
             //User is signed in.
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(userInfo.displayName);
-
             dspCurrentUser.append(currentUserDisplayName);
-            dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
+
+            if (userInfo.photoUrl === "") {
+
+                dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
+
+            }
+
+            else {
+
+                let image = $('<img>');
+                image.attr('src', userInfo.photoUrl);
+                let imageContainer = $('<p>');
+                imageContainer.append(image);
+                dspCurrentUser.prepend(imageContainer);
+
+            }
+
+
+            
+
 
             //Show ChatApp content
             chatApp.removeClass("chatApp-hidden");

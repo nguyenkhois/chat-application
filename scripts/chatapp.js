@@ -17,25 +17,16 @@ $(document).ready(function () {
             dspCurrentUser.append(currentUserDisplayName);
 
             if (userInfo.photoUrl === "") {
-
                 dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
-
             }
-
             else {
-
                 image.attr('src', userInfo.photoUrl);
                 let imageContainer = $('<p>');
                 imageContainer.append(image);
                 dspCurrentUser.prepend(imageContainer);
-
             }
 
-
-            
-
-
-            //Show ChatApp content
+           //Show ChatApp content
             chatApp.removeClass("chatApp-hidden");
 
             //Get components
@@ -56,12 +47,16 @@ $(document).ready(function () {
             //Handle enter key
             $(document).keydown(function(event) {
                 let keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode === '13')
-                    sendAMessage(user);
+                if (keycode === '13'){
+                    //K modified
+                    //sendAMessage(user);
+                    event.preventDefault();
+                    btnSend.click();
+                }
             });
         } else {
             // No user is signed in.
-            $("#lnkSignOut").hide();
+            //$("#lnkSignOut").hide();
             goToSignIn();
         }
     });
@@ -159,8 +154,11 @@ $(document).ready(function () {
                 snapshot.forEach(function (childSnapshot) {
                     buildAMessage(childSnapshot.val());
                 });
+
+                //K moved
+                scrollChatContents();
+                txtMessage.focus();
             });
-            txtMessage.focus();
         }
         else{return false}
     }
@@ -177,7 +175,7 @@ $(document).ready(function () {
         messageBox.append(message);
 
         chatContents.append(messageBox);
-        scrollChatContents();
+        //scrollChatContents();
     }
 
     function scrollChatContents() {

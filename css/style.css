@@ -1,13 +1,6 @@
 /* Common styles */
-
-
-
-
 *{box-sizing: border-box;}
-body{
-    margin: 0;
-
-}
+body{margin: 0;}
 header, main, footer{width: 100%;}
 #container{
     background: url("../images/bg-image.jpg")center center no-repeat;
@@ -34,7 +27,6 @@ header, main, footer{width: 100%;}
     padding: 5px;
     margin: 6px 0 0 0;
     font-size: 20px;
-
 
     /* Clear the user's operating system's theme */
     -webkit-appearance: none;
@@ -67,7 +59,7 @@ header, main, footer{width: 100%;}
     cursor: pointer;
 }
 .button-signin, .button-signup, .button-send-message {
-    width: 200px;
+    width: 100px;
     background-color: #627e94;
     color: #ffffff;
     position: center;
@@ -103,10 +95,7 @@ header, main, footer{width: 100%;}
     background-color: #1c2d67d4;
     color: #cbcbcb;
 }
-#chatContents{
-
-    height: 80%;
-}
+#chatContents{height: 80%;}
 .messageBox {
     margin: 12px;
     padding: 5px;
@@ -121,11 +110,9 @@ header, main, footer{width: 100%;}
     align-items: center;
     background-color: #e5e5e5;
     box-shadow: 0px -2px 10px;
-
 }
 #logga div {
     margin: 1% 1%;
-
 }
 #dspCurrentUser p img {
 
@@ -133,28 +120,21 @@ header, main, footer{width: 100%;}
     height: 100px;
     border-radius: 50%;
 }
-
-
-
 #logotyp {
     font-size: 3em;
     font-family: 'Dancing Script', cursive;
     font-weight: bold;
     letter-spacing: 0.1em;
 }
-
 #dspCurrentChannel {
     margin-right: 30px;
     font-size: 1.2em;
 }
-
-
-
 .sendMessage{
-    padding-right: 10px;
-    padding-left: 25%;
+    text-align: center;
+    /*padding-right: 10px;
+    padding-left: 25%;*/
     height: 80px;
-
     background-color: #cfcfcf;
 }
 .sendMessage input{
@@ -170,7 +150,7 @@ header, main, footer{width: 100%;}
     border: 1px solid #a1a1a1;
     border-radius: 8px;
 
-    width: 60%;
+    width: 70%;
     margin: 20px 10px 10px 20px;
     padding: 0 5px 0 5px;
     height: 45px;

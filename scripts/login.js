@@ -6,10 +6,10 @@ $(document).ready(function() {
             nodeRef.once("value")
                 .then(function(snapshot) {
                     let objUserInfo = {
-                    userId: user.uid,
-                    displayName: snapshot.val().displayName,
-                    phoneNumber: snapshot.val().phoneNumber,
-                    photoUrl: snapshot.val().photoUrl};
+                        userId: user.uid,
+                        displayName: snapshot.val().displayName,
+                        phoneNumber: snapshot.val().phoneNumber,
+                        photoUrl: snapshot.val().photoUrl};
 
                     if (typeof(Storage) !== "undefined")
                         localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 event.preventDefault();
                 email = $('#email').val();
                 password = $('#pass').val();
-                
+
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function(user){
@@ -36,21 +36,14 @@ $(document).ready(function() {
                         }
                     })
                     .catch(function (error) {
-                        //console.log("signin catch (false)");
+                        console.log("signin catch (false)");
 
-                        if (mailPattern.test($("#email").val()) === false) {
-                            //alert("Email format is wrong");
-                            $('#email').attr('placeholder', 'Enter your email');
-                            $('#email').addClass('errorClass');
-                            $('#email').val('');
-                            return false;
-                        }
-                        else {
-                            alert("Email or Password is wrong");
-                            return false;
-                        }
+                        $("#loginerrormessage").text("Email or password is wrong!");
+                        $("#loginerrormessage").css("color", "red");
+                        $("#pass").css("margin-bottom", "1px");
 
                     });
+
             });
             console.log("authstatechanged FALSE");
         }

@@ -92,7 +92,7 @@ $(document).ready(function () {
     function getUserList() {
         let nodeRef = database.ref("users/").orderByChild("displayName");
         nodeRef.on('value',function (snapshot) {
-            dspUserList.html("<h3>Members</h3>");//clear the display before get new data
+            //dspUserList.html("<h3>Members</h3>");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
                 buildAnUser(childSnapshot.val());
             });
@@ -109,7 +109,6 @@ $(document).ready(function () {
         else {
             displayName.addClass("userlist-offline");
         }
-
         displayName.prepend(statusDot);
         dspUserList.append(displayName);
     }

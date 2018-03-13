@@ -167,10 +167,10 @@ $(document).ready(function () {
     function buildAMessage(objData) {
         let displayName = $("<b>").text(objData.displayName);
         let dsplTime = objData.timeStamp.substr(objData.timeStamp.indexOf(' ') + 1);
-        let timeStamp = $("<i>").html(' ' + dsplTime + ' ');
+        let timeStamp = $("<i>").text(' ' + dsplTime + ' ');
         let messageBox = $('<div>');
         messageBox.addClass('messageBox');
-        let message = $("<p>").html(" " + objData.content + " ");
+        let message = $("<p>").text(" " + objData.content + " ");
 
         messageBox.append(displayName);
         messageBox.append(timeStamp);

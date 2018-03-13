@@ -16,6 +16,12 @@ $(document).ready(function() {
                 })
                 .catch(function (error) {});
             console.log("authstatechanged TRUE");
+
+            $("#login").on("click", function(event) {
+                $("#loginerrormessage").text("Looks like you are already logged in, please logout first");
+                $("#loginerrormessage").css("color", "red");
+                $("#pass").css("margin-bottom", "1px");
+            });
         }
         else {
             $("#login").on("click", function(event) {

@@ -15,30 +15,35 @@ $(document).ready(function () {
         else
             return false
     }
-    function updateProfile(userId, newDisplayName, newPassword, newPhoneNumber, newPhotoUrl){
+    function updateProfile(newDisplayName, newPhoneNumber, newPhotoUrl) {
+        let user = auth.currentUser;
+        let nodeRef = database.ref("users/" + user.uid);
+        nodeRef.update({displayName: newDisplayName,
+            phoneNumber: newPhoneNumber,
+            photoUrl: newPhotoUrl})
+            .then(function () {
+                //Updated user profile into Firebase database successfully
+                //Store object objUserInfo to localStorage
+                let objUserInfo = {
+                    userId: user.uid,
+                    displayName: newDisplayName,
+                    phoneNumber: newPhoneNumber,
+                    photoUrl: newPhotoUrl};
+
+                if (typeof(Storage) !== "undefined")
+                    localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
+
+                $("#systemMessages").text("Updating for your profile is successfully!");
+                $(location).attr("href",chatPage);
+            })
+            .catch(function(error) {});
+    }
+    function updatePasswordAndProfile(newDisplayName, newPassword, newPhoneNumber, newPhotoUrl){
         let user = auth.currentUser;
         user.updatePassword(newPassword).then(function() {
-            // Update successful.
-            let nodeRef = database.ref("users/" + userId);
-            nodeRef.update({displayName: newDisplayName,
-                            phoneNumber: newPhoneNumber,
-                            photoUrl: newPhotoUrl})
-                .then(function () {
-                    //Updated user profile into Firebase database successfully
-                    //Store object objUserInfo to localStorage
-                    let objUserInfo = {
-                        userId: user.uid,
-                        displayName: newDisplayName,
-                        phoneNumber: newPhoneNumber,
-                        photoUrl: newPhotoUrl};
-
-                    if (typeof(Storage) !== "undefined")
-                        localStorage.chatappCurrentUserInfo = JSON.stringify(objUserInfo);
-
-                    $("#systemMessages").text("Updating for your profile is successfully!");
-                    $(location).attr("href",chatPage);
-                })
-                .catch(function(error) {});
+            //Update password successful.
+            //Update profile in Firebase database
+            updateProfile(newDisplayName,newPhoneNumber,newPhotoUrl);
         }).catch(function(error) {});
     }
     function validateUpdateProfile(){
@@ -48,12 +53,12 @@ $(document).ready(function () {
             txtDisplayName.val('');
             txtDisplayName.focus();
             return false
-        }else if(txtNewPassword.val() === '' || txtNewPassword.val().length < 6){
+        }else if(txtNewPassword.val() !== '' && txtNewPassword.val().length < 6){
             txtNewPassword.attr('placeholder', "Password must be at least 6 character");
             txtNewPassword.addClass('errorClass');
             txtNewPassword.focus();
             return false
-        }else if(txtRetypePassword.val() === '' || txtRetypePassword.val().length < 6){
+        }else if(txtRetypePassword.val() !== '' && txtRetypePassword.val().length < 6){
             txtRetypePassword.attr('placeholder', "Confirm password must be at least 6 character");
             txtRetypePassword.addClass('errorClass');
             txtRetypePassword.focus();
@@ -83,8 +88,12 @@ $(document).ready(function () {
                 txtPhotoUrl.val(objCurrentUserInfo.photoUrl);
             }
             btnUpdateProfile.click(function () {
-                if (validateUpdateProfile())
-                    updateProfile(user.uid, txtDisplayName.val(), txtNewPassword.val(), txtPhoneNumber.val(), txtPhotoUrl.val());
+                if (validateUpdateProfile()){
+                    if (txtNewPassword.val() === '' && txtRetypePassword.val() === '')
+                        updateProfile(txtDisplayName.val(), txtPhoneNumber.val(), txtPhotoUrl.val());
+                    else
+                        updatePasswordAndProfile(txtDisplayName.val(), txtNewPassword.val(), txtPhoneNumber.val(), txtPhotoUrl.val())
+                }
             });
         }else
             $(location).attr("href",signInPage);

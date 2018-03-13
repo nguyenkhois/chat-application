@@ -110,7 +110,7 @@ $(document).ready(function () {
     function getUserList() {
         let nodeRef = database.ref("users/").orderByChild("displayName");
         nodeRef.on('value',function (snapshot) {
-            //dspUserList.html("<h3>Members</h3>");//clear the display before get new data
+            dspUserList.html(" ");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
                 buildAnUser(childSnapshot.val());
             });
@@ -169,8 +169,8 @@ $(document).ready(function () {
         let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
         let message = $("<p>").html(": " + objData.content + " ");
 
+        message.prepend(timeStamp);
         message.prepend(displayName);
-        message.append(timeStamp);
 
         chatContents.append(message);
     }

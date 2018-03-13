@@ -111,7 +111,7 @@ header, main, footer{width: 100%;}
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: #e5e5e5;
     box-shadow: 0px 0px 7px;
 
 }

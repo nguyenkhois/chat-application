@@ -1,17 +1,5 @@
-//Created for Simon
-//included in login.html
-
 $(document).ready(function() {
-    //Get HTML elements
-    //let user = auth.currentUser; //Declared but not used - K
-    let knapp = document.getElementById("login");
-    //let paragraf = document.getElementById("paragraf"); //Declared but not used -K
-
-    //Functions
-    //Need input validation (HTML validation and JS validation)
-
     //MAIN
-    //Need handle errors which you receive from Firebase server and show them to the user
     auth.onAuthStateChanged(function(user){
         if (user) {
             let nodeRef = database.ref("users/" + user.uid);
@@ -30,10 +18,11 @@ $(document).ready(function() {
             console.log("authstatechanged TRUE");
         }
         else {
-            knapp.addEventListener("click", function(event) {
+            $("#login").on("click", function(event) {
                 event.preventDefault();
-                let email = document.getElementById("email").value;
-                let password = document.getElementById("pass").value;
+                email = $('#email').val();
+                password = $('#pass').val();
+                
 
                 auth.signInWithEmailAndPassword(email, password)
                     .then(function(user){
@@ -47,7 +36,20 @@ $(document).ready(function() {
                         }
                     })
                     .catch(function (error) {
-                        console.log("signin catch (false)")
+                        //console.log("signin catch (false)");
+
+                        if (mailPattern.test($("#email").val()) === false) {
+                            //alert("Email format is wrong");
+                            $('#email').attr('placeholder', 'Enter your email');
+                            $('#email').addClass('errorClass');
+                            $('#email').val('');
+                            return false;
+                        }
+                        else {
+                            alert("Email or Password is wrong");
+                            return false;
+                        }
+
                     });
             });
             console.log("authstatechanged FALSE");

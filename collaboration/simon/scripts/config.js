@@ -1,10 +1,10 @@
 let config = {
-    apiKey: "AIzaSyBbRmOv-XuKngTAir2avZf7jk1D7jxg9LU",
-    authDomain: "gruppprojekt.firebaseapp.com",
-    databaseURL: "https://gruppprojekt.firebaseio.com",
-    projectId: "gruppprojekt",
-    storageBucket: "gruppprojekt.appspot.com",
-    messagingSenderId: "623943997734"
+    apiKey: "AIzaSyBcG4q6O9Xo6uFL6UaA25cHU5AIJfOT1w4",
+    authDomain: "chattapp-b40df.firebaseapp.com",
+    databaseURL: "https://chattapp-b40df.firebaseio.com",
+    projectId: "chattapp-b40df",
+    storageBucket: "chattapp-b40df.appspot.com",
+    messagingSenderId: "957415389331"
 };
 firebase.initializeApp(config);
 let database = firebase.database();

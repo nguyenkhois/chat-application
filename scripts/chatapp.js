@@ -7,12 +7,13 @@ $(document).ready(function () {
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
-
+    let userInfo = JSON.parse(localStorage.getItem('chatappCurrentUserInfo'));
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
             //Get current user display name
-            let currentUserDisplayName = $("<b>").text(user.displayName);
+            let currentUserDisplayName = $("<b>").text(userInfo.displayName);
+
             dspCurrentUser.append(currentUserDisplayName);
             dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
 
@@ -99,10 +100,17 @@ $(document).ready(function () {
     }
     function buildAnUser(objData) {
         let displayName = $("<p>").text(objData.displayName);
+        let statusDot = $('<span>').text('●\t');
 
-        if (objData.isOnline)
+        if (objData.isOnline) {
             displayName.addClass("userlist-online");
+        }
 
+        else {
+            displayName.addClass("userlist-offline");
+        }
+
+        displayName.prepend(statusDot);
         dspUserList.append(displayName);
     }
 
@@ -116,7 +124,7 @@ $(document).ready(function () {
 
             nodeRef.set({
                 userId: user.uid,
-                displayName: user.displayName,
+                displayName: userInfo.displayName,
                 channelId: channelId,
                 content: message,
                 timeStamp: getCurrentDate() + " " + getCurrentTime()

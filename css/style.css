@@ -177,7 +177,7 @@ header, main, footer{width: 100%;}
 
 .chatContents{padding: 5px;overflow-y: scroll; }
 
-.userinfo{padding: 10px;text-align: center;}
+.userinfo{text-align: center;}
 .userinfo a{text-decoration: none; color: #fff; font-weight: lighter; letter-spacing: 0.08em;}
 .userinfo a:hover{text-decoration: underline;}
 .userinfo b {
@@ -187,14 +187,13 @@ header, main, footer{width: 100%;}
     letter-spacing: 0.1em;
 }
 /*Channels*/
-.channels{padding: 10px; margin-left: 10px;}
+.channels{margin-left: 20px;}
 .channel-item{cursor: pointer;color: #deb887; margin-left: 10px; font-weight: lighter; font-size: 1.2em; letter-spacing: 0.08em;}
 .channel-item:hover{text-decoration: underline;}
 
 /*User list*/
 .userlist {
-    margin-left: 10px;
-    padding: 10px;
+    margin-left: 20px;
     height: 200px;
     overflow-y: auto;
 }

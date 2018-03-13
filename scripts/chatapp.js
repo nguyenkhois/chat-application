@@ -173,5 +173,13 @@ $(document).ready(function () {
         message.prepend(displayName);
 
         chatContents.append(message);
+
+        scrollChatContents();
+    }
+
+    function scrollChatContents() {
+        let wtf = $('#chatContents');
+        let height = wtf[0].scrollHeight;
+        wtf.scrollTop(height);
     }
 });

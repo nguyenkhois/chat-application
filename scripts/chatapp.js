@@ -7,6 +7,7 @@ $(document).ready(function () {
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
+    let image = $('<img>');
     let userInfo = JSON.parse(localStorage.getItem('chatappCurrentUserInfo'));
     auth.onAuthStateChanged(function(user) {
         if (user) {
@@ -23,7 +24,6 @@ $(document).ready(function () {
 
             else {
 
-                let image = $('<img>');
                 image.attr('src', userInfo.photoUrl);
                 let imageContainer = $('<p>');
                 imageContainer.append(image);
@@ -166,11 +166,17 @@ $(document).ready(function () {
     }
     function buildAMessage(objData) {
         let displayName = $("<b>").text(objData.displayName);
-        let timeStamp = $("<i>").html("(" + objData.timeStamp + ")");
-        let message = $("<p>").html(": " + objData.content + " ");
+        let dsplTime = objData.timeStamp.substr(objData.timeStamp.indexOf(' ') + 1);
+        let timeStamp = $("<i>").html(' ' + dsplTime + ' ');
+        let messageBox = $('<div>');
+        messageBox.addClass('messageBox');
+        let message = $("<p>").html(" " + objData.content + " ");
 
-        message.prepend(timeStamp);
-        message.prepend(displayName);
+        messageBox.append(displayName);
+        messageBox.append(timeStamp);
+        messageBox.append(message);
+
+        chatContents.append(messageBox);
 
         chatContents.append(message);
 

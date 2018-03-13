@@ -1,6 +1,11 @@
 # ChatApp
 * [Online demo](https://nguyenkhois.github.io/chat-application/views/)
 
+# Installation
+* Config to your Firebase database here: `/scripts/config.js`
+* Create chat channels by run `/tools/create-channels.html`
+* Begin using ChatApp now by run `index.html` (^_~)
+
 ## Changelog
 ### Version 1.0 (2018-03-10)
 * Created the simple chat app with basic functions:

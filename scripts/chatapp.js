@@ -13,7 +13,7 @@ $(document).ready(function () {
         if (user) {
             //User is signed in.
             //Get current user display name
-            let currentUserDisplayName = $("<b>").text(userInfo.displayName);
+            let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾');
             dspCurrentUser.append(currentUserDisplayName);
 
             if (userInfo.photoUrl === "") {
@@ -183,4 +183,10 @@ $(document).ready(function () {
         let height = wtf[0].scrollHeight;
         wtf.scrollTop(height);
     }
+
+    $('#dspCurrentUser').on('click', function (event) {
+        event.preventDefault();
+        $('#hiddenUserInfo').toggle();
+
+    });
 });

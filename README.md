@@ -7,6 +7,11 @@
 * Begin using ChatApp now by run `index.html` (^_~)
 
 ## Changelog
+### Version 1.1 (2018-03-14)
+* Added a sender avatar to messages
+* Fixed bugs for message timestamp
+* Improved menu for the current user
+* Improved code JS for effect and performance
 ### Version 1.0 (2018-03-10)
 * Created the simple chat app with basic functions:
    * Sign in

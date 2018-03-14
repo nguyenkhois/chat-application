@@ -1,14 +1,14 @@
 # ChatApp
 * [Online demo](https://nguyenkhois.github.io/chat-application/views/)
 
-# Installation
+## Installation
 * Config to your Firebase database here: `/scripts/config.js`
 * Create chat channels by run `/tools/create-channels.html`
 * Begin using ChatApp now by run `index.html` (^_~)
 
 ## Changelog
 ### Version 1.1 (2018-03-14)
-* Added a sender avatar to messages
+* Added sender avatar to messages
 * Fixed bugs for message timestamp
 * Improved menu for the current user
 * Improved code JS for effect and performance

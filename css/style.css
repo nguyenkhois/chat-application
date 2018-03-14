@@ -287,6 +287,9 @@ header, main, footer{width: 100%;}
         display: block;
 
     }
+    #container {
+        height: 100vh!important;
+    }
 }
 
 @media screen and (min-width: 769px) {

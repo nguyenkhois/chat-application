@@ -1,65 +1,16 @@
 $(document).ready(function () {
+    //Get HTML elements and reuse later
     let dspChannels = $("#dspChannels");
     let dspCurrentChannel = $("#dspCurrentChannel");
     let dspUserList = $("#dspUserList");
     let dspCurrentUser = $("#dspCurrentUser");
+    let hiddenUserInfo = $('#hiddenUserInfo');
     let txtMessage = $("#txtMessage");
     let chatContents = $("#chatContents");
     let btnSend = $("#btnSend");
     let chatApp = $("#chatApp");
     let image = $('<img>');
     let userInfo = JSON.parse(localStorage.getItem('chatappCurrentUserInfo'));
-    auth.onAuthStateChanged(function(user) {
-        if (user) {
-            //User is signed in.
-            //Get current user display name
-            let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾').addClass("currentUser");
-            dspCurrentUser.append(currentUserDisplayName);
-
-            if (userInfo.photoUrl === "") {
-                dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
-            }
-            else {
-                image.attr('src', userInfo.photoUrl);
-                let imageContainer = $('<p>');
-                imageContainer.append(image);
-                dspCurrentUser.prepend(imageContainer);
-            }
-
-           //Show ChatApp content
-            chatApp.removeClass("chatApp-hidden");
-
-            //Get components
-            getChannels();
-            getUserList();
-
-            //Get messages in default channel
-            let objDefaultChannel = getDefaultChannel();
-            objDefaultChannel.then(function (result) {
-                let defaultChannelId = Object.keys(result)[0];
-                let defaultChannelName = result[defaultChannelId].channelName;
-                storeChannel(defaultChannelId,defaultChannelName);
-            });
-
-            //Assign onclick function to button Send end Enter key
-            btnSend.click(function(){sendAMessage(user);});
-
-            //Handle enter key
-            $(document).keydown(function(event) {
-                let keycode = (event.keyCode ? event.keyCode : event.which);
-                if (keycode === '13'){
-                    //K modified
-                    //sendAMessage(user);
-                    event.preventDefault();
-                    btnSend.click();
-                }
-            });
-        } else {
-            // No user is signed in.
-            //$("#lnkSignOut").hide();
-            goToSignIn();
-        }
-    });
 
     //FUNCTIONS
     //Channels
@@ -87,9 +38,9 @@ $(document).ready(function () {
         }
     }
     function retrieveChannel() {
-        if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId){
+        if (typeof(Storage) !== "undefined" && sessionStorage.chatappChannelId)
             return sessionStorage.chatappChannelId;
-        }else
+        else
             return false
     }
     function getDefaultChannel() {
@@ -97,15 +48,14 @@ $(document).ready(function () {
         return nodeRef.once("value")
             .then(function (snapshot) {
                 return snapshot.val();
-            })
-            .catch(function () {});
+            }).catch(function () {});
     }
 
     //Users
     function getUserList() {
         let nodeRef = database.ref("users/").orderByChild("displayName");
         nodeRef.on('value',function (snapshot) {
-            dspUserList.html(" ");//clear the display before get new data
+            dspUserList.html("");//clear the display before get new data
             snapshot.forEach(function (childSnapshot) {
                 buildAnUser(childSnapshot.val());
             });
@@ -115,13 +65,11 @@ $(document).ready(function () {
         let displayName = $("<p>").text(objData.displayName);
         let statusDot = $('<span>').text('●\t');
 
-        if (objData.isOnline) {
+        if (objData.isOnline)
             displayName.addClass("userlist-online");
-        }
-
-        else {
+        else
             displayName.addClass("userlist-offline");
-        }
+
         displayName.prepend(statusDot);
         dspUserList.append(displayName);
     }
@@ -139,12 +87,10 @@ $(document).ready(function () {
                 displayName: userInfo.displayName,
                 channelId: channelId,
                 content: message,
-                timeStamp: getCurrentDate() + " " + getCurrentTime()
-            })
+                timeStamp: getCurrentDate() + " " + getCurrentTime()})
                 .then(function () {txtMessage.val("");})
                 .catch(function(error) {writeToLogs(error.code, "fnSendAMessage: "+error.message);});
-        }
-        else{return false}
+        }else{return false}
     }
     function getMessages(channelId) {
         if (parseInt(channelId)){
@@ -159,8 +105,7 @@ $(document).ready(function () {
                 scrollChatContents();
                 txtMessage.focus();
             });
-        }
-        else{return false}
+        }else{return false}
     }
     function buildAMessage(objData) {
         //Get sender information
@@ -207,31 +152,64 @@ $(document).ready(function () {
 
             chatContents.append(messageBox);
         });
-
-        /*let displayName = $("<b>").text(objData.displayName);
-        let dsplTime = objData.timeStamp.substr(objData.timeStamp.indexOf(' ') + 1);
-        let timeStamp = $("<i>").text(' ' + dsplTime + ' ');
-        let messageBox = $('<div>');
-        messageBox.addClass('messageBox');
-        let message = $("<p>").text(" " + objData.content + " ");
-
-        messageBox.append(displayName);
-        messageBox.append(timeStamp);
-        messageBox.append(message);
-
-        chatContents.append(messageBox);*/
-        //scrollChatContents();
     }
-
     function scrollChatContents() {
-        let wtf = $('#chatContents');
-        let height = wtf[0].scrollHeight;
-        wtf.scrollTop(height);
+        chatContents.scrollTop(chatContents[0].scrollHeight); //Modified by K
     }
 
-    $('#dspCurrentUser').on('click', function (event) {
-        event.preventDefault();
-        $('#hiddenUserInfo').toggle();
+    //MAIN
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            //User is signed in.
+            //Get current user display name
+            let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾').addClass("currentUser");
+            dspCurrentUser.append(currentUserDisplayName);
 
+            if (userInfo.photoUrl === "")
+                dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
+            else {
+                image.attr('src', userInfo.photoUrl);
+                let imageContainer = $('<p>');
+                imageContainer.append(image);
+                dspCurrentUser.prepend(imageContainer);
+            }
+
+            //Show ChatApp content
+            chatApp.removeClass("chatApp-hidden");
+
+            //Get components
+            getChannels();
+            getUserList();
+
+            //Get messages in default channel
+            let objDefaultChannel = getDefaultChannel();
+            objDefaultChannel.then(function (result) {
+                let defaultChannelId = Object.keys(result)[0];
+                let defaultChannelName = result[defaultChannelId].channelName;
+                storeChannel(defaultChannelId,defaultChannelName);
+            });
+
+            //Assign onclick function to button Send end Enter key
+            btnSend.click(function(){sendAMessage(user);});
+
+            //Handle enter key
+            $(document).keydown(function(event) {
+                let keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode === '13'){
+                    //K modified
+                    //sendAMessage(user);
+                    event.preventDefault();
+                    btnSend.click();
+                }
+            });
+
+            dspCurrentUser.on('click', function (event) {
+                //Modified by K
+                event.preventDefault();
+                hiddenUserInfo.toggle();
+            });
+        } else
+            // No user is signed in.
+            goToSignIn();
     });
 });

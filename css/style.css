@@ -197,7 +197,7 @@ header, main, footer{width: 100%;}
     height: 45px;
     font-size: 18px;
 }
-
+.sendMessage input:focus{border: 1px solid #0094ff;box-shadow: 0 0 5px #0094ff;}
 .chatContents{padding: 5px;overflow-y: scroll; }
 
 .userinfo{text-align: center;}

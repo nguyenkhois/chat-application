@@ -2,6 +2,7 @@
 <html lang="en" manifest="manifest.appcache">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
     <title>ChatApp - Chat now...</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../external-libraries/web-addons.css">
@@ -22,6 +23,7 @@
                         <span id="logotyp">Chat <i class="far fa-comment"></i></span>
                     </div>
 					<span id="dspCurrentChannel"></span>
+                    <button class="burger2" id="openmenu"><img class="burger" src="../images/hamburger.png"></button>
                 </div>
 
                 <div id="chatContents" class="chatContents">Tips! Choose a channel on the right panel!</div>
@@ -34,6 +36,7 @@
             </div>
 
             <div id="dspPartFunctions">
+                <span><button class="burger2" id="closemenu"><img class="burger" src="../images/hamburger.png"></button></span>
                 <div id="dspUserInfo" class="userinfo">
                     <p id="dspCurrentUser"></p>
 					<div id="hiddenUserInfo" style="display: none;">

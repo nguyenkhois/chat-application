@@ -161,9 +161,14 @@ $(document).ready(function () {
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
+            //onDisconnect
+            let onDisconnectRef = database.ref("users/" + user.uid);
+            onDisconnectRef.onDisconnect().update({isOnline: false});
+
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾').addClass("currentUser");
             dspCurrentUser.append(currentUserDisplayName);
+
             if (userInfo.photoUrl === "")
                 dspCurrentUser.prepend("<p><img src='../images/icon-user.png'></p>");
             else {
@@ -212,3 +217,27 @@ $(document).ready(function () {
             goToSignIn();
     });
 });
+
+$("#openmenu").click(function () {
+
+    $("#dspPartMain").addClass("hide");
+    $("#dspPartFunctions").addClass("asideshow").removeClass("hide");
+    $("#openmenu").addClass("hide");
+
+});
+$("#closemenu").click(function () {
+
+    $("#dspPartFunctions").removeClass("asideshow").addClass("hide");
+    $("#dspPartMain").removeClass("hide");
+    $("#openmenu").removeClass("hide");
+
+});
+
+
+
+
+
+
+
+
+

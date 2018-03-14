@@ -243,3 +243,61 @@ header, main, footer{width: 100%;}
     display: none;
 }
 
+
+
+
+
+.burger {
+    height: 30px;
+    width: 30px;
+    background-color: none;
+}
+.burger2 {
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    padding: 10px;
+    float: right ;
+}
+.hide {
+    display: none!important;
+}
+.asideshow {
+    width: 100%!important;
+    display: block!important;
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    #dspPartMain {
+        font-size: 1.1em;
+    }
+    #chatContents {
+        height: 69%;
+    }
+    #dspPartFunctions {
+        display: none;
+    }
+
+    #openmenu {
+        display: block;
+    }
+    #closemenu {
+        display: block;
+
+    }
+}
+
+@media screen and (min-width: 769px) {
+
+    #openmenu {
+        display: none;
+    }
+    #closemenu {
+        display: none;
+    }
+    #dspPartFunctions {
+        display: block!important;
+    }
+}

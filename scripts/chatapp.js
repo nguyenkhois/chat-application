@@ -13,7 +13,7 @@ $(document).ready(function () {
         if (user) {
             //User is signed in.
             //Get current user display name
-            let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾');
+            let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾').addClass("currentUser");
             dspCurrentUser.append(currentUserDisplayName);
 
             if (userInfo.photoUrl === "") {
@@ -163,7 +163,52 @@ $(document).ready(function () {
         else{return false}
     }
     function buildAMessage(objData) {
-        let displayName = $("<b>").text(objData.displayName);
+        //Get sender information
+        let nodeRef = database.ref("users/" + objData.userId);
+        nodeRef.once("value",function (snapshot) {
+            let senderPhotoUrl;
+            let existSender = false;
+
+            //Get the sender photoUrl
+            if (snapshot.val()){
+                //The sender ID exist in Firebase database
+                snapshot.val().photoUrl ? senderPhotoUrl = snapshot.val().photoUrl : senderPhotoUrl = defaultUserPhotoUrl;
+                existSender = true;
+            }else
+            //The sender ID does not exist in Firebase database
+                senderPhotoUrl = defaultUserPhotoUrl;
+
+
+            //RENDER A COMPLETE MESSAGE
+            //Definition for a message box
+            let currentDate = getCurrentDate();
+            let postedDate = objData.timeStamp.substr(0,objData.timeStamp.indexOf(' '));
+            let dsplTime;
+            if (currentDate !== postedDate)
+                dsplTime = objData.timeStamp; //It is not today and the message has a fully datetime
+            else
+                dsplTime = "Today " + objData.timeStamp.substr(objData.timeStamp.indexOf(' ') + 1);
+
+            //Definitions for message details
+            let message = `<div class="message-userinfo">
+                                <img src="${senderPhotoUrl}" alt=""><br>
+                                ${$("<b>").html(objData.displayName).text()}                             
+                            </div>
+                            <div class="message-content">
+                                <i>${dsplTime}</i><br>
+                                ${$("<p>").html(objData.content).text()}
+                            </div>`;
+
+            let messageBox = $("<div>").html(message).addClass('messageBox');
+
+            //The sender ID does not exist in Firebase database but the message found
+            if (!existSender)
+                messageBox.addClass("message-userinfo-not-exist");
+
+            chatContents.append(messageBox);
+        });
+
+        /*let displayName = $("<b>").text(objData.displayName);
         let dsplTime = objData.timeStamp.substr(objData.timeStamp.indexOf(' ') + 1);
         let timeStamp = $("<i>").text(' ' + dsplTime + ' ');
         let messageBox = $('<div>');
@@ -174,7 +219,7 @@ $(document).ready(function () {
         messageBox.append(timeStamp);
         messageBox.append(message);
 
-        chatContents.append(messageBox);
+        chatContents.append(messageBox);*/
         //scrollChatContents();
     }
 

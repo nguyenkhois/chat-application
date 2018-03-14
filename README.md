@@ -7,8 +7,6 @@
 * Begin using ChatApp now by run `index.html` (^_~)
 
 ## Changelog
-### Version 1.2 (2018-03-14)
-* Added method .onDisconnect()
 ### Version 1.1 (2018-03-14)
 * Added sender avatar to messages
 * Fixed bugs for message timestamp

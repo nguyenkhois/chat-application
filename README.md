@@ -1,5 +1,5 @@
 # ChatApp
-* [Online demo](https://nguyenkhois.github.io/chat-application/views/)
+* [Online demo for version 1.1](https://www.vlexikon.com/demo/js-chatapp/v1.1/views/)
 
 ## Installation
 * Config to your Firebase database here: `/scripts/config.js`

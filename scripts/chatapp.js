@@ -115,12 +115,12 @@ $(document).ready(function () {
             let existSender = false;
 
             //Get the sender photoUrl
-            if (snapshot.val()){
+            if (snapshot){
                 //The sender ID exist in Firebase database
                 snapshot.val().photoUrl ? senderPhotoUrl = snapshot.val().photoUrl : senderPhotoUrl = defaultUserPhotoUrl;
                 existSender = true;
             }else
-            //The sender ID does not exist in Firebase database
+                //The sender ID does not exist in Firebase database
                 senderPhotoUrl = defaultUserPhotoUrl;
 
 

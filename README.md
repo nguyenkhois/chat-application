@@ -1,5 +1,5 @@
 # ChatApp
-* [Online demo for version 1.1](https://www.vlexikon.com/demo/js-chatapp/v1.1/views/)
+* [Online demo for version 1.1.x](https://www.vlexikon.com/demo/js-chatapp/v1.1/views/)
 
 ## Installation
 * Config to your Firebase database here: `/scripts/config.js`
@@ -7,6 +7,8 @@
 * Begin using ChatApp now by run `index.html` (^_~)
 
 ## Changelog
+### Version 1.1.1 (2018-03-15)
+* Fixed bugs
 ### Version 1.1 (2018-03-14)
 * Added sender avatar to messages
 * Fixed bugs for message timestamp

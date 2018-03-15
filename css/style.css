@@ -123,7 +123,7 @@ header, main, footer{width: 100%;}
 .messageBox b {
     letter-spacing: 0.08em;
 }
-.message-content{width:100%;padding: 0 20px 0 20px;line-height: 22px;}
+.message-content{width:100%;padding: 0 20px 0 20px;line-height: 22px;word-break: break-all;}
 .message-userinfo{
     margin: 5px;
     width: 100px;

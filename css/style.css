@@ -129,6 +129,7 @@ header, main, footer{width: 100%;}
     width: 100px;
     text-align: center;
     font-weight: bold;
+    word-break: break-all;
 }
 .message-userinfo img{
     width: 50px;
@@ -219,6 +220,7 @@ header, main, footer{width: 100%;}
     margin-left: 20px;
     height: 200px;
     overflow-y: auto;
+    word-break: break-all;
 }
 
 #dspChannels h3, #userlistHeader h3 {

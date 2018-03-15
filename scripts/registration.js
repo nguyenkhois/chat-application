@@ -15,8 +15,8 @@ $(document).ready(function () {
 
     //Functions
     function userTest() {
-        if (!namePattern.test(displayName.val()) || displayName.val() === '') {
-            displayName.attr('placeholder', 'Enter a display name');
+        if (!namePattern.test(displayName.val()) || displayName.val() === '' || displayName.val().length > 20) {
+            displayName.attr('placeholder', 'Enter a display name, max 20 character');
             displayName.addClass('errorClass');
             displayName.val('');
             displayName.focus();

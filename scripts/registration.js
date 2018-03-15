@@ -9,10 +9,6 @@ $(document).ready(function () {
     let photoUrl = $('#txtPhotoUrl');
     let btnCreateAccount = $('#btnCreateAccount');
 
-    //Founded in config.js which are global variables
-    //let namePattern = /^[a-zA-Z-\s]+$/;
-    //let mailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
     //Functions
     function userTest() {
         if (!namePattern.test(displayName.val()) || displayName.val() === '') {

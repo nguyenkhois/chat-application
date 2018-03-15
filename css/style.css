@@ -129,6 +129,7 @@ header, main, footer{width: 100%;}
     width: 100px;
     text-align: center;
     font-weight: bold;
+    word-break: break-all;
 }
 .message-userinfo img{
     width: 50px;
@@ -236,6 +237,7 @@ header, main, footer{width: 100%;}
     color: #fff;
     font-weight: lighter;
     letter-spacing: 0.1em;
+    word-break: break-all;
 }
 .userlist-online span {color: #00ce00;}
 .userlist-offline span {color: red;}

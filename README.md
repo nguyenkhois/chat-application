@@ -10,6 +10,7 @@
 ### Version 1.1 (2018-03-14)
 * Added sender avatar to messages
 * Fixed bugs for message timestamp
+* Fixed bugs for display name, user list
 * Improved menu for the current user
 * Improved code JS for effect and performance
 ### Version 1.0 (2018-03-10)

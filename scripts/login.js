@@ -26,8 +26,8 @@ $(document).ready(function() {
         else {
             $("#login").on("click", function(event) {
                 event.preventDefault();
-                email = $('#email').val();
-                password = $('#pass').val();
+                let email = $('#email').val();
+                let password = $('#pass').val();
 
 
                 auth.signInWithEmailAndPassword(email, password)
@@ -36,7 +36,6 @@ $(document).ready(function() {
                             let nodeRef = database.ref("users/" + user.uid);
                             nodeRef.update({isOnline: true})
                                 .then(function () {
-                                    //window.location.href = chatPage;
                                     $(location).attr("href",chatPage); //K added
                                 })
                         }
@@ -49,7 +48,6 @@ $(document).ready(function() {
                         $("#pass").css("margin-bottom", "1px");
 
                     });
-
             });
             console.log("authstatechanged FALSE");
         }

@@ -7,6 +7,8 @@
 * Begin using ChatApp now by run `index.html` (^_~)
 
 ## Changelog
+### Version 1.1.2 (2018-03-16)
+* Using .onDisconnect() in Firebase database
 ### Version 1.1.1 (2018-03-15)
 * Fixed bugs
 ### Version 1.1 (2018-03-14)

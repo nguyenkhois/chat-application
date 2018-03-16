@@ -46,9 +46,8 @@ $(document).ready(function () {
     function getDefaultChannel() {
         let nodeRef = database.ref("channels/").orderByChild("defaultChannel").equalTo(true);
         return nodeRef.once("value")
-            .then(function (snapshot) {
-                return snapshot.val();
-            }).catch(function () {});
+            .then(function (snapshot) {return snapshot.val();})
+            .catch(function () {});
     }
 
     //Users
@@ -161,6 +160,11 @@ $(document).ready(function () {
     auth.onAuthStateChanged(function(user) {
         if (user) {
             //User is signed in.
+
+            //onDisconnect
+            let currentUserRef = database.ref("users/" + user.uid);
+            currentUserRef.onDisconnect().update({isOnline: false});
+
             //Get current user display name
             let currentUserDisplayName = $("<b>").text(userInfo.displayName + ' ▾').addClass("currentUser");
             dspCurrentUser.append(currentUserDisplayName);
@@ -193,9 +197,8 @@ $(document).ready(function () {
             btnSend.click(function(){
                 //K modified
                 event.preventDefault();
-                if (txtMessage.val().length > 0){
+                if (txtMessage.val().length > 0)
                     sendAMessage(user);
-                }
             });
 
             //Handle enter key

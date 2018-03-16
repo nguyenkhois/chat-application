@@ -9,6 +9,7 @@
 ## Changelog
 ### Version 1.1.2 (2018-03-16)
 * Using .onDisconnect() in Firebase database
+* Using Firebase version 4.11.0
 ### Version 1.1.1 (2018-03-15)
 * Fixed bugs
 ### Version 1.1 (2018-03-14)

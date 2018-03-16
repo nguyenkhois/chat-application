@@ -1,11 +1,11 @@
 // Initialize Firebase
 let config = {
-    apiKey: "AIzaSyBcG4q6O9Xo6uFL6UaA25cHU5AIJfOT1w4",
-    authDomain: "chattapp-b40df.firebaseapp.com",
-    databaseURL: "https://chattapp-b40df.firebaseio.com",
-    projectId: "chattapp-b40df",
-    storageBucket: "chattapp-b40df.appspot.com",
-    messagingSenderId: "957415389331"
+    apiKey: "AIzaSyCLy8U4Wy0D0qYAVezelDt-TrFiueCfYng",
+    authDomain: "ecchat-c34bf.firebaseapp.com",
+    databaseURL: "https://ecchat-c34bf.firebaseio.com",
+    projectId: "ecchat-c34bf",
+    storageBucket: "ecchat-c34bf.appspot.com",
+    messagingSenderId: "258738066233"
 };
 
 firebase.initializeApp(config);

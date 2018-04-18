@@ -1,6 +1,5 @@
 # [Chat application](https://www.vlexikon.com/demo/js-chatapp)
-* View [online demo](https://www.vlexikon.com/demo/js-chatapp)
-* This web application created from HTML5, CSS3, [jQuery](https://jquery.com/) och [Firebase v4.10.1](https://firebase.google.com/)
+* This web application created by HTML5, CSS3, [jQuery](https://jquery.com/) och [Firebase v4.10.1](https://firebase.google.com/)
 
 
 # Changelogs

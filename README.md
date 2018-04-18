@@ -22,3 +22,6 @@
       * Display the current user information (display name and picture)
       * Chat in a chosen channel      
       * A user list (who is online/ offline)
+      
+## How we work together
+* [View on our Wiki](https://github.com/nguyenkhois/chat-application/wiki)
